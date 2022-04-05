@@ -9,7 +9,8 @@ mod 'puppetlabs-apt', '8.3.0'
 mod 'puppetlabs-powershell', '5.0.0'
 mod 'puppetlabs-pwshlib', '0.10.1'
 mod 'puppetlabs-reboot', '4.1.0'
-
+# SNOW + CD4PE
+mod 'puppetlabs-servicenow_change_requests', '0.4.1'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
