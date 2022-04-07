@@ -28,6 +28,8 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  notify { 'imatest message that keeps': }
+  Integer[0,10].each |Integer $index, Integer $num| {
+    notify { "${index} - ${num}": }
+  }
 
 }
