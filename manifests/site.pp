@@ -29,7 +29,7 @@ node default {
   # Example:
   #   class { 'my_class': }
   Integer[0,10].each |Integer $index, Integer $num| {
-    notify { "${index} - ${num}": }
+    notify { "Index: ${index} - Num: ${num}": }
   }
 
 }
