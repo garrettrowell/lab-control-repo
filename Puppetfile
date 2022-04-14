@@ -2,6 +2,10 @@ forge 'https://forge.puppet.com'
 
 # CD4PE
 mod 'puppetlabs-cd4pe_jobs', '1.6.0'
+mod 'puppetlabs-cd4pe', '3.2.2'
+mod 'puppetlabs-puppet_authorization', '0.5.1'
+mod 'puppetlabs-concat', '7.1.1'
+mod 'puppetlabs-hocon', '1.1.0'
 # CD4PE Job Hardware
 mod 'puppetlabs-docker', '4.1.2'
 mod 'puppetlabs-stdlib', '8.1.0'
