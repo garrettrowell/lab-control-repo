@@ -48,9 +48,9 @@ plan deployments::servicenow_integration(
   }
 
   # Find the pipeline ID for the commit SHA
-  puts "${repo_name} ${commit_sha}"
   $pipeline_id_result = cd4pe_deployments::search_pipeline($repo_name, $commit_sha)
-  puts "${pipeline_id_result.inspect}"
+  fail_plan("${repo_name} ${commit_sha} ${pipeline_id_result}")
+
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
 
   # Loop until items in the pipeline stage are done
