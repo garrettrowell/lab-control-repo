@@ -49,7 +49,7 @@ plan deployments::servicenow_integration(
 
   # Find the pipeline ID for the commit SHA
   $pipeline_id_result = cd4pe_deployments::search_pipeline($repo_name, $commit_sha)
-  #  fail_plan("type: ${repo_type} name: ${repo_name} sha: ${commit_sha} result: ${pipeline_id_result}")
+  cd4pe_deployments::create_custom_deployment_event("type: ${repo_type.inspect} sha: ${commit_sha.inspect} name: ${repo_name} result: ${pipeline_id_result}") unless $repo_type == 'CONTROL_REPO'
 
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
 
