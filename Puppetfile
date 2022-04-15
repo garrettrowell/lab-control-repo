@@ -20,7 +20,7 @@ mod 'puppetlabs-servicenow_change_requests', '0.4.1'
 mod 'apache',
   git:    'https://github.com/garrettrowell/lab-puppetlabs-apache',
   :branch => :control_branch,
-  :default_branch => 'v6.5.1'
+  :default_branch => 'main'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
