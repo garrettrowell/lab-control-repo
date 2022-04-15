@@ -50,7 +50,6 @@ plan deployments::servicenow_integration(
   # Find the pipeline ID for the commit SHA
   $pipeline_id_result = cd4pe_deployments::search_pipeline($repo_name, $commit_sha)
   cd4pe_deployments::create_custom_deployment_event("type: ${repo_type} sha: ${commit_sha} name: ${repo_name} result: ${pipeline_id_result}")
-  cd4pe_deployments::create_custom_deployment_event("${ENV}")
 
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
 
