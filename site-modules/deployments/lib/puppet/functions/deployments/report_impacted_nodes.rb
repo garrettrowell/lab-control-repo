@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+ 
 Puppet::Functions.create_function(:'deployments::report_impacted_nodes') do
   dispatch :report_impacted_nodes do
     required_param 'Hash', :ia_env_report
