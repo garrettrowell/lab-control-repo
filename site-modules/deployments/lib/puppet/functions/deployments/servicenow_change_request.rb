@@ -75,7 +75,8 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
           # Convert the output to a more useable single hash (PDB returns an array of hashes)
           facts = fact_hash.map { |item| [item['name'], item['value']] }.to_h
           # Build the payload for ServiceNow, set the mandatory 'name' field to the node's certname
-          fact_payload = { 'name' => node }
+          #fact_payload = { 'name' => node }
+          fact_payload = { 'name' => node.split('.').first } # growell
           # Add facts based on the fact_map at the start of the function
           fact_map.each do |fact, ci_field|
             if fact.split('.').count > 1
