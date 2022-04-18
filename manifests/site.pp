@@ -28,7 +28,7 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  Integer[0,15].each |Integer $index, Integer $num| {
+  Integer[0,25].each |Integer $index, Integer $num| {
     notify { "Index: ${index} - Num: ${num}":
       withpath => true,
     }
