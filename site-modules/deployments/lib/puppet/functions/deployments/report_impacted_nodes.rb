@@ -45,8 +45,8 @@ Puppet::Functions.create_function(:'deployments::report_impacted_nodes') do
 #        add2log('    Node ' + node_result['certnameLowercase'] + ': Failed compilation')
         add2log('    Node ' + node_short + ': Failed compilation') # growell
         compile_failures += 1
-#        ia_report['IA_node_reports'][node_result['certnameLowercase']]['Compilation'] = 'FAILED'
-        ia_report['IA_node_reports'][node_short]['Compilation'] = 'FAILED'
+        ia_report['IA_node_reports'][node_result['certnameLowercase']]['Compilation'] = 'FAILED'
+#        ia_report['IA_node_reports'][node_short]['Compilation'] = 'FAILED'
         bln_safe_report = false
       else
 #        add2log('    Node ' + node_result['certnameLowercase'] + ' resources: ' +
@@ -55,28 +55,28 @@ Puppet::Functions.create_function(:'deployments::report_impacted_nodes') do
           node_result['resourcesModified'].count.to_s + ' modified, ' +
           node_result['resourcesRemoved'].count.to_s + ' removed.')
         compile_success += 1
-#        ia_report['IA_node_reports'][node_result['certnameLowercase']]['compilation'] = 'SUCCESS'
-#        ia_report['IA_node_reports'][node_result['certnameLowercase']]['resourcesAdded'] = node_result['resourcesAdded'].count.to_i
-#        ia_report['IA_node_reports'][node_result['certnameLowercase']]['resourcesModified'] = node_result['resourcesModified'].count.to_i
-#        ia_report['IA_node_reports'][node_result['certnameLowercase']]['resourcesRemoved'] = node_result['resourcesRemoved'].count.to_i
-#        ia_report['IA_node_reports'][node_result['certnameLowercase']]['totalResourcesChanges'] = (
-        ia_report['IA_node_reports'][node_short]['compilation'] = 'SUCCESS'
-        ia_report['IA_node_reports'][node_short]['resourcesAdded'] = node_result['resourcesAdded'].count.to_i
-        ia_report['IA_node_reports'][node_short]['resourcesModified'] = node_result['resourcesModified'].count.to_i
-        ia_report['IA_node_reports'][node_short]['resourcesRemoved'] = node_result['resourcesRemoved'].count.to_i
-        ia_report['IA_node_reports'][node_short]['totalResourcesChanges'] = (
+        ia_report['IA_node_reports'][node_result['certnameLowercase']]['compilation'] = 'SUCCESS'
+        ia_report['IA_node_reports'][node_result['certnameLowercase']]['resourcesAdded'] = node_result['resourcesAdded'].count.to_i
+        ia_report['IA_node_reports'][node_result['certnameLowercase']]['resourcesModified'] = node_result['resourcesModified'].count.to_i
+        ia_report['IA_node_reports'][node_result['certnameLowercase']]['resourcesRemoved'] = node_result['resourcesRemoved'].count.to_i
+        ia_report['IA_node_reports'][node_result['certnameLowercase']]['totalResourcesChanges'] = (
+#        ia_report['IA_node_reports'][node_short]['compilation'] = 'SUCCESS'
+#        ia_report['IA_node_reports'][node_short]['resourcesAdded'] = node_result['resourcesAdded'].count.to_i
+#        ia_report['IA_node_reports'][node_short]['resourcesModified'] = node_result['resourcesModified'].count.to_i
+#        ia_report['IA_node_reports'][node_short]['resourcesRemoved'] = node_result['resourcesRemoved'].count.to_i
+#        ia_report['IA_node_reports'][node_short]['totalResourcesChanges'] = (
           node_result['resourcesAdded'].count.to_i +
           node_result['resourcesModified'].count.to_i +
           node_result['resourcesRemoved'].count.to_i
         )
-#        if ia_report['IA_node_reports'][node_result['certnameLowercase']]['totalResourcesChanges'] > max_changes_per_node
-#          ia_report['IA_node_reports'][node_result['certnameLowercase']]['change_verdict'] = 'unsafe'
-        if ia_report['IA_node_reports'][node_short]['totalResourcesChanges'] > max_changes_per_node
-          ia_report['IA_node_reports'][node_short]['change_verdict'] = 'unsafe'
+        if ia_report['IA_node_reports'][node_result['certnameLowercase']]['totalResourcesChanges'] > max_changes_per_node
+          ia_report['IA_node_reports'][node_result['certnameLowercase']]['change_verdict'] = 'unsafe'
+#        if ia_report['IA_node_reports'][node_short]['totalResourcesChanges'] > max_changes_per_node
+#          ia_report['IA_node_reports'][node_short]['change_verdict'] = 'unsafe'
           bln_safe_report = false
         else
-#          ia_report['IA_node_reports'][node_result['certnameLowercase']]['change_verdict'] = 'safe'
-          ia_report['IA_node_reports'][node_short]['change_verdict'] = 'safe'
+          ia_report['IA_node_reports'][node_result['certnameLowercase']]['change_verdict'] = 'safe'
+#          ia_report['IA_node_reports'][node_short]['change_verdict'] = 'safe'
         end
       end
     end
