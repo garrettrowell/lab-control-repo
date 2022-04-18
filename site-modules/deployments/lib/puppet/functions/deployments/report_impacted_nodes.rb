@@ -39,8 +39,8 @@ Puppet::Functions.create_function(:'deployments::report_impacted_nodes') do
     bln_safe_report = ia_report['IA_state'] == 'DONE'
     impacted_nodes['rows'].each do |node_result|
       node_short = node_result['certnameLowercase'].split('.').first # added growell
-#      ia_report['IA_node_reports'][node_result['certnameLowercase']] = {}
-      ia_report['IA_node_reports'][node_short] = {} # growell
+      ia_report['IA_node_reports'][node_result['certnameLowercase']] = {}
+#      ia_report['IA_node_reports'][node_short] = {} # growell
       if node_result.fetch('compileFailed', false)
 #        add2log('    Node ' + node_result['certnameLowercase'] + ': Failed compilation')
         add2log('    Node ' + node_short + ': Failed compilation') # growell
