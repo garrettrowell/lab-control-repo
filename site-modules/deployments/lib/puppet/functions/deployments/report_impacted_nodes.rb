@@ -42,15 +42,15 @@ Puppet::Functions.create_function(:'deployments::report_impacted_nodes') do
       ia_report['IA_node_reports'][node_result['certnameLowercase']] = {}
 #      ia_report['IA_node_reports'][node_short] = {} # growell
       if node_result.fetch('compileFailed', false)
-#        add2log('    Node ' + node_result['certnameLowercase'] + ': Failed compilation')
-        add2log('    Node ' + node_short + ': Failed compilation') # growell
+        add2log('    Node ' + node_result['certnameLowercase'] + ': Failed compilation')
+#        add2log('    Node ' + node_short + ': Failed compilation') # growell
         compile_failures += 1
         ia_report['IA_node_reports'][node_result['certnameLowercase']]['Compilation'] = 'FAILED'
 #        ia_report['IA_node_reports'][node_short]['Compilation'] = 'FAILED'
         bln_safe_report = false
       else
-#        add2log('    Node ' + node_result['certnameLowercase'] + ' resources: ' +
-        add2log('    Node ' + node_short + ' resources: ' +
+        add2log('    Node ' + node_result['certnameLowercase'] + ' resources: ' +
+#        add2log('    Node ' + node_short + ' resources: ' +
           node_result['resourcesAdded'].count.to_s + ' added, ' +
           node_result['resourcesModified'].count.to_s + ' modified, ' +
           node_result['resourcesRemoved'].count.to_s + ' removed.')
