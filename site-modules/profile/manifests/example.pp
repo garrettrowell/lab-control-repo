@@ -38,7 +38,7 @@ class profile::example (
   }
 
   user { 'another':
-    password => 'plaintextpasswords_notcool_soyeahs',
+    password => 'plaintextpasswords_notcool_soyeahs1',
   }
 
   user { 'plain_lookup_take2':
