@@ -41,10 +41,10 @@ class profile::example (
     password => Sensitive('plaintextpasswords_notcool'),
   }
 
-  #  user { 'plain_lookup_take2':
-  #    password => $plains_lookup,
-  #  }
-  #
+  user { 'plain_lookup_take2':
+    password => $plains_lookup,
+  }
+
   #  echo { "plain lookup: ${plains_lookup}": }
   #
   #  file { '/tmp/test.file':
