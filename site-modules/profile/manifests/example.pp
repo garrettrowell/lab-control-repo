@@ -32,7 +32,7 @@ class profile::example (
       target =>  '/tmp/afile',
     ;
     'one':
-      content => $plains_lookup,
+      content => $plains_lookup.unwrap,
       order   => '01',
     ;
   }
