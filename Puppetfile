@@ -23,6 +23,7 @@ mod 'apache',
   :default_branch => 'main'
 
 mod 'puppetlabs-exec', '2.0.0'
+mod 'ipcrm-echo', '0.1.7'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
