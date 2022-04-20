@@ -5,4 +5,4 @@ lookup_options:
     convert_to: 'Sensitive'
 
 profile::example::password_test: "%{alias('test_password')}"
-test_password: 'new password'
+test_password: 'newer password'
