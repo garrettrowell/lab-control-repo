@@ -1,2 +1,7 @@
 ---
 message: "This node is using common data"
+lookup_options:
+  '^profile::.+::password_\w+$':
+    convert_to: 'Sensitive'
+
+test_password: 'real secure'
