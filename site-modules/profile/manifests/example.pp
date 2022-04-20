@@ -4,5 +4,9 @@ class profile::example (
   file { '/tmp/test.txt':
     content => $password_test,
   }
+  file { '/tmp/unwrap.txt':
+    content => $password_test.unwrap,
+  }
+
   #notify {"the test: ${password_test}":}
 }
