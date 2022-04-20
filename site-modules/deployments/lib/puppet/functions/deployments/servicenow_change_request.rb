@@ -53,7 +53,9 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     array_of_cis = []
     report['notes'].each do |ia|
       ia['IA_node_reports'].each_key do |node|
-        ci_req_uri = "#{endpoint}/api/now/table/cmdb_ci?sysparm_query=name=#{node}"
+#        ci_req_uri = "#{endpoint}/api/now/table/cmdb_ci?sysparm_query=name=#{node}"
+        ci_req_uri = "#{endpoint}/api/now/table/cmdb_ci?sysparm_query=name=#{node.split('.').first}"
+
         ci_req_response = make_request(ci_req_uri, :get, proxy, username, password, oauth_token)
         raise Puppet::Error, "2-Received unexpected response from the ServiceNow endpoint: #{ci_req_response.code} #{ci_req_response.body}" unless ci_req_response.is_a?(Net::HTTPOK)
 
@@ -75,8 +77,8 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
           # Convert the output to a more useable single hash (PDB returns an array of hashes)
           facts = fact_hash.map { |item| [item['name'], item['value']] }.to_h
           # Build the payload for ServiceNow, set the mandatory 'name' field to the node's certname
-          #fact_payload = { 'name' => node }
-          fact_payload = { 'name' => node.split('.').first } # growell
+          fact_payload = { 'name' => node }
+#          fact_payload = { 'name' => node.split('.').first } # growell
           # Add facts based on the fact_map at the start of the function
           fact_map.each do |fact, ci_field|
             if fact.split('.').count > 1
