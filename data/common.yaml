@@ -5,4 +5,4 @@ message: "This node is using common data"
 #    convert_to: 'Sensitive'
 
 #profile::example::password_test: 'work dangit1234567'
-test_password: 'workdangit1234567'
+test_password: 'workdangit12345678'
