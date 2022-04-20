@@ -4,5 +4,5 @@ lookup_options:
   '^profile::.+::password_\w+$':
     convert_to: 'Sensitive'
 
-profile::example::password_test: 'hello world'
-test_password: 'hello world'
+profile::example::password_test: 'hello world1'
+test_password: 'hello world1'
