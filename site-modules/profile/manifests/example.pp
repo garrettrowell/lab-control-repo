@@ -38,7 +38,7 @@ class profile::example (
   }
 
   user { 'another':
-    password => Sensitive('plaintextpassword'),
+    password => Sensitive('plaintextpasswords_notcool'),
   }
 
   #  user { 'plain_lookup_take2':
