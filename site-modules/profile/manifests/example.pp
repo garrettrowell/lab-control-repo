@@ -1,7 +1,7 @@
 class profile::example (
   #  $password_test,
   #  $do_a_lookup = Sensitive.new(lookup('test_password')),
-  $plains_lookup = lookup('test_password'),
+  $plains_lookup = Sensitive(lookup('test_password')),
   #  $another = 'param'
 ){
   #  file { '/tmp/test.txt':
@@ -38,7 +38,7 @@ class profile::example (
   }
 
   user { 'another':
-    password => 'plaintextpasswords_notcool_soyeahs1',
+    password => Sensitive('plaintextpasswords_notcool_soyeahs1'),
   }
 
   user { 'plain_lookup_take2':
