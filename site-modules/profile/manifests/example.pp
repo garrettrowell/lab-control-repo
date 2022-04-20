@@ -31,6 +31,10 @@ class profile::example (
 
   echo { "plain lookup: ${plains_lookup}": }
 
+  file { '/tmp/test.file':
+    ensure => present,
+    source => 'puppet:///growell/test.file',
+  }
   #  user { 'plain_wrapped':
   #    password => $do_a_lookup,
   #  }
