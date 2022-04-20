@@ -25,16 +25,28 @@ class profile::example (
   #    password => $password_test.unwrap
   #  }
 
-  user { 'plain_lookup_take2':
-    password => $plains_lookup,
+  concat { '/tmp/afile': }
+
+  concat::fragment {
+    default:
+      target =>  '/tmp/afile',
+    ;
+    'one':
+      content => $plains_lookup,
+      order   => '01',
+    ;
   }
 
-  echo { "plain lookup: ${plains_lookup}": }
-
-  file { '/tmp/test.file':
-    ensure => present,
-    source => 'puppet:///growell/test.file',
-  }
+  #  user { 'plain_lookup_take2':
+  #    password => $plains_lookup,
+  #  }
+  #
+  #  echo { "plain lookup: ${plains_lookup}": }
+  #
+  #  file { '/tmp/test.file':
+  #    ensure => present,
+  #    source => 'puppet:///growell/test.file',
+  #  }
   #  user { 'plain_wrapped':
   #    password => $do_a_lookup,
   #  }
