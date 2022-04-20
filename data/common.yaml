@@ -4,5 +4,5 @@ lookup_options:
   '^profile::.+::password_\w+$':
     convert_to: 'Sensitive'
 
-profile::example::password_test: 'plaintext password'
+profile::example::password_test: "%{alias('test_password')}"
 test_password: 'real secure'
