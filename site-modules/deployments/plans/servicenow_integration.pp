@@ -130,6 +130,17 @@ plan deployments::servicenow_integration(
     $ia_csv = {'csv'=>'No Impact Analysis performed'}
   }
 
+  $repo = {
+    owner    => 'garrettrowell', # owner of the repo in github
+    name     => $repo_name,
+    commit   => $commit_sha,
+    pull_num => ''
+  }
+
+  #testing getting PR approver from GH
+  $pull_info = deployments::pr_from_commit($repo)
+  #  $pull_approver = deployments::pr_approver($repo)
+
   # Combine all reports into a single hash
   $report = deployments::combine_reports($stage_report, $scm_data, $ia_envs_report)
 
