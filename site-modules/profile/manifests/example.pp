@@ -25,6 +25,7 @@ class profile::example (
   #    password => $password_test.unwrap
   #  }
 
+
   $password = Sensitive.new('password1')
   $salt     = Sensitive.new('asalt')
 
