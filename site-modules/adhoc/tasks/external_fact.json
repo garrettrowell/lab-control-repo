@@ -1,0 +1,16 @@
+{
+  "description": "Create a simple key/value external fact",
+  "input_method": "stdin",
+  "parameters": {
+    "fact": {
+      "description": "Name of the fact to create/set",
+      "type": "Optional[String[1]]",
+      "default": "company_facts"
+    },
+    "value": {
+      "description": "Value of the fact to set",
+      "type": "Variant[NotUndef, Hash[String[1], NotUndef]]"
+    }
+  },
+  "files": ["ruby_task_helper/files/task_helper.rb"]
+}
