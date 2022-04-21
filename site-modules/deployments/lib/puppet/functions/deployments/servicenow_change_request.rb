@@ -44,7 +44,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     description = CGI.escape(descr).gsub(%r{\+}, '%20')
     short_description = CGI.escape("Puppet Code - '#{report['scm']['description']}' to stage '#{promote_to_stage_name}'").gsub(%r{\+}, '%20')
 
-    call_function('cd4pe_deployments::create_custom_deployment_event', "report_scm: #{report.inspect}")
+    call_function('cd4pe_deployments::create_custom_deployment_event', "report_scm: #{report['scm'].inspect}")
 
 #    request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?category=Puppet%20Code&short_description=#{short_description}&description=#{description}"
     request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?description=#{description}"
