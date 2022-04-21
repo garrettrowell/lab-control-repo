@@ -46,7 +46,7 @@ plan deployments::servicenow_integration(
   unless $report_stage {
     $stage_num = deployments::get_running_stage()
   }
-
+ 
   # Find the pipeline ID for the commit SHA
   $pipeline_id_result = cd4pe_deployments::search_pipeline($repo_name, $commit_sha)
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
