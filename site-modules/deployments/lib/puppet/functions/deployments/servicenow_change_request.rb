@@ -185,12 +185,14 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
 
     assignment_group_sys_id = arr_assignment_groups[0]['sys_id']
 
-    curr_time = Time.now
+    start_time = Time.now
+    end_time = start_time + 345600 # add 96hrs represented as seconds
+
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
-      data[:start_date] = curr_time.strftime("%Y-%m-%d %k:%M:%S")
-      data[:end_date] = curr_time.strftime("%Y-%m-%d %k:%M:%S")
+      data[:start_date] = start_time.strftime("%Y-%m-%d %k:%M:%S")
+      data[:end_date] = end_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:state] = 'assess'
       data[:risk_impact_analysis] = ia_url + "\n" + report['log'] # rubocop:disable Style/StringConcatenation
       data[:assignment_group] = assignment_group_sys_id
