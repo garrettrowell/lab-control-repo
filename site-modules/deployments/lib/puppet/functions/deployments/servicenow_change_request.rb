@@ -44,7 +44,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     short_description = CGI.escape("Puppet Code - '#{report['scm']['description']}' to stage '#{promote_to_stage_name}'").gsub(%r{\+}, '%20')
 
 #    request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?category=Puppet%20Code&short_description=#{short_description}&description=#{description}"
-    request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?category=Software&description=#{description}"
+    request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?description=#{description}"
 
     request_response = make_request(request_uri, :post, proxy, username, password, oauth_token)
     raise Puppet::Error, "1-Received unexpected response from the ServiceNow endpoint: #{request_response.code} #{request_response.body}" unless request_response.is_a?(Net::HTTPSuccess)
