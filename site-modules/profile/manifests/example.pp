@@ -26,7 +26,7 @@ class profile::example (
   #  }
 
 
-  $password = Sensitive.new('password1')
+  $password = Sensitive.new('password12')
   $salt     = Sensitive.new('asalt')
 
   user { 'using_pwhash':
