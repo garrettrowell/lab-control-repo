@@ -4,6 +4,7 @@ require 'net/http'
 require 'uri'
 require 'cgi'
 require 'json'
+require 'date'
 
 Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
   dispatch :servicenow_change_request do
@@ -45,7 +46,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
 
 #    request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?category=Puppet%20Code&short_description=#{short_description}&description=#{description}"
     request_uri = "#{endpoint}/api/sn_chg_rest/v1/change/normal?description=#{description}"
- 
+
     request_response = make_request(request_uri, :post, proxy, username, password, oauth_token)
     raise Puppet::Error, "1-Received unexpected response from the ServiceNow endpoint: #{request_response.code} #{request_response.body}" unless request_response.is_a?(Net::HTTPSuccess)
 
@@ -187,6 +188,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
+      data[:start_date] = '2022-04-21 12:14:16'
       data[:state] = 'assess'
       data[:risk_impact_analysis] = ia_url + "\n" + report['log'] # rubocop:disable Style/StringConcatenation
       data[:assignment_group] = assignment_group_sys_id
