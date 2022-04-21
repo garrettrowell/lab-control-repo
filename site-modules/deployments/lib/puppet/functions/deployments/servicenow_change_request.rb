@@ -185,8 +185,9 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
 
     assignment_group_sys_id = arr_assignment_groups[0]['sys_id']
 
-    start_time = Time.now
+    start_time = Time.now.utc
     end_time = start_time + 345600 # add 96hrs represented as seconds
+    call_function('cd4pe_deployments::create_custom_deployment_event', "Setting start_date: #{start_time.strftime("%Y-%m-%d %k:%M:%S")} end_date: #{end_time.strftime("%Y-%m-%d %k:%M:%S")} stz: #{start_time.zone} etz: #{end_time.zone}")
 
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
