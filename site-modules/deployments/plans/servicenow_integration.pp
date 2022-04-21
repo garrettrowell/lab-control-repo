@@ -49,9 +49,9 @@ plan deployments::servicenow_integration(
 
   # Find the pipeline ID for the commit SHA
   $pipeline_id_result = cd4pe_deployments::search_pipeline($repo_name, $commit_sha)
-  cd4pe_deployments::create_custom_deployment_event("type: ${repo_type} sha: ${commit_sha} name: ${repo_name} result: ${pipeline_id_result}")
-
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
+
+  cd4pe_deployments::create_custom_deployment_event("pipeline_id_result: ${pipeline_id_result} pipeline_id: ${pipeline_id}")
 
   # Loop until items in the pipeline stage are done
   $loop_result = ctrl::do_until('limit'=>80) || {
@@ -60,6 +60,9 @@ plan deployments::servicenow_integration(
     # Get the current pipeline stage status (temporary variables that don't exist outside this loop)
     $pipeline_result = cd4pe_deployments::get_pipeline_trigger_event($repo_name, $pipeline_id, $commit_sha)
     $pipeline = cd4pe_deployments::evaluate_result($pipeline_result)
+
+    cd4pe_deployments::create_custom_deployment_event("pipeline: ${pipeline} pipeline_result: ${pipeline_result}")
+
     # If $report_stage is set, set the stage number by searching the pipeline output
     if $report_stage {
       $stage = $pipeline['stageNames'].filter |$stagenumber,$stagename| { $stagename == $report_stage }
