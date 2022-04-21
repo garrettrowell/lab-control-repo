@@ -29,8 +29,8 @@ class profile::example (
   $salt     = Sensitive.new('asalt')
 
   user { 'using_pwhash':
-    password => pw_hash($password,'SHA-512',$salt)
-    #    password => Sensitive(pw_hash($password,'SHA-512',$salt))
+    #password => pw_hash($password,'SHA-512',$salt)
+    password => Sensitive(pw_hash($password,'SHA-512',$salt))
   }
 
   concat { '/tmp/afile': }
