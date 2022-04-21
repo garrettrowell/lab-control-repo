@@ -4,7 +4,7 @@ require 'net/http'
 require 'uri'
 require 'cgi'
 require 'json'
-require 'date'
+require 'time'
 
 Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
   dispatch :servicenow_change_request do
@@ -185,10 +185,12 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
 
     assignment_group_sys_id = arr_assignment_groups[0]['sys_id']
 
+    curr_time = Time.now
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
-      data[:start_date] = '2022-04-21 12:14:16'
+      data[:start_date] = curr_time.strftime("%Y-%m-%d %k:%M:%S")
+      data[:end_date] = curr_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:state] = 'assess'
       data[:risk_impact_analysis] = ia_url + "\n" + report['log'] # rubocop:disable Style/StringConcatenation
       data[:assignment_group] = assignment_group_sys_id
