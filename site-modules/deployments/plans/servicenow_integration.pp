@@ -46,12 +46,13 @@ plan deployments::servicenow_integration(
   unless $report_stage {
     $stage_num = deployments::get_running_stage()
   }
- 
+
   # Find the pipeline ID for the commit SHA
   $pipeline_id_result = cd4pe_deployments::search_pipeline($repo_name, $commit_sha)
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
 
   cd4pe_deployments::create_custom_deployment_event("pipeline_id_result: ${pipeline_id_result} pipeline_id: ${pipeline_id}")
+
 
   # Loop until items in the pipeline stage are done
   $loop_result = ctrl::do_until('limit'=>80) || {
@@ -62,6 +63,11 @@ plan deployments::servicenow_integration(
     $pipeline = cd4pe_deployments::evaluate_result($pipeline_result)
 
     cd4pe_deployments::create_custom_deployment_event("pipeline: ${pipeline} pipeline_result: ${pipeline_result}")
+    cd4pe_deployments::create_custom_deployment_event("initiator: ${pipeline['initiator']}")
+
+    #cd4pe_deployments::create_custom_deployment_event("initiator: ${pipeline['initiator']}")
+
+
 
     # If $report_stage is set, set the stage number by searching the pipeline output
     if $report_stage {
@@ -138,7 +144,7 @@ plan deployments::servicenow_integration(
   }
 
   #testing getting PR approver from GH
-  $pull_info = deployments::pr_from_commit($repo)
+  #$pull_info = deployments::pr_from_commit($repo)
   #  $pull_approver = deployments::pr_approver($repo)
 
   # Combine all reports into a single hash
