@@ -5,19 +5,20 @@ require 'uri'
 require 'cgi'
 require 'json'
 
-Puppet::Functions.create_function(:'deployments::pr_from_commit') do
-  dispatch :pr_from_commit do
+Puppet::Functions.create_function(:'deployments::pr_reviewer') do
+  dispatch :pr_reviewer do
     required_param 'Hash', :repo
+    required_param 'String', :pr_number
   end
 
-  def pr_from_commit(repo)
-    request_uri = "https://api.github.com/repos/#{repo['owner']}/#{repo['name']}/commits/#{repo['commit']}/pulls"
+  def pr_reviewer(repo, pr_number)
+    request_uri = "https://api.github.com/repos/#{repo['owner']}/#{repo['name']}/pulls/#{pr_number}/reviews"
     request_response = make_request(request_uri, :get)
     body = JSON.parse(request_response.body)
-#    call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{body}")
-    pr_number = body[0]['number']
-    call_function('cd4pe_deployments::create_custom_deployment_event', ": #{pr_number}")
-    return pr_number
+    call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{body}")
+#    pr_number = body[0]['number']
+#    call_function('cd4pe_deployments::create_custom_deployment_event', ": #{pr_number}")
+#    return pr_number
   end
 
   def make_request(endpoint, type, payload = nil, content_type = 'application/json')
