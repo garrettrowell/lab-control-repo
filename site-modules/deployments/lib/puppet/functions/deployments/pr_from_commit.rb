@@ -4,7 +4,7 @@ require 'net/http'
 require 'uri'
 require 'cgi'
 require 'json'
-
+ 
 Puppet::Functions.create_function(:'deployments::pr_from_commit') do
   dispatch :pr_from_commit do
     required_param 'Hash', :repo
