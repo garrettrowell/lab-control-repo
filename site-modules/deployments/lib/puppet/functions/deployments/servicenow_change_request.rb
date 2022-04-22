@@ -21,7 +21,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     required_param 'String',    :connection_alias
     required_param 'Boolean',   :auto_create_ci
     required_param 'String',    :ia_csv_export
-    required_param 'Sring',     :gl_endpoint
+    required_param 'String',    :gl_endpoint
     required_param 'Sensitive', :gl_oauth_token
 #    required_param 'Hash',      :gl_now_usermap
   end
