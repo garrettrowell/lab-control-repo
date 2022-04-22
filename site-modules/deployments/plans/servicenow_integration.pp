@@ -64,8 +64,16 @@ plan deployments::servicenow_integration(
     cd4pe_deployments::create_custom_deployment_event("pipeline: ${pipeline} pipeline_result: ${pipeline_result}")
     cd4pe_deployments::create_custom_deployment_event("initiator: ${pipeline['initiator']}")
 
-    #cd4pe_deployments::create_custom_deployment_event("initiator: ${pipeline['initiator']}")
+    $repo = {
+      owner    => 'garrettrowell', # owner of the repo in github
+      name     => $repo_name,
+      commit   => $commit_sha,
+    }
 
+    #testing getting PR approver from GH
+    $pull_number = deployments::pr_from_commit($repo)
+    cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
+    $pull_approver = deployments::pr_reviewer($repo, $pull_number)
 
 
     # If $report_stage is set, set the stage number by searching the pipeline output
@@ -95,7 +103,7 @@ plan deployments::servicenow_integration(
 
   # Gather pipeline stage reporting
   cd4pe_deployments::create_custom_deployment_event('Gathering pipeline report information...')
-  $scm_data = deployments::report_scm_data($pipeline)
+  $scm_data = deployments::report_scm_data($pipeline, $pull_approver)
   $stage_report = deployments::report_pipeline_stage($pipeline, $stage_num, $repo_name)
 
   # See if the stage contains an Impact Analysis
@@ -139,13 +147,7 @@ plan deployments::servicenow_integration(
     owner    => 'garrettrowell', # owner of the repo in github
     name     => $repo_name,
     commit   => $commit_sha,
-    pull_num => ''
   }
-
-  #testing getting PR approver from GH
-  $pull_number = deployments::pr_from_commit($repo)
-  cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
-  $pull_approver = deployments::pr_reviewer($repo, $pull_number)
 
   # Combine all reports into a single hash
   $report = deployments::combine_reports($stage_report, $scm_data, $ia_envs_report)
