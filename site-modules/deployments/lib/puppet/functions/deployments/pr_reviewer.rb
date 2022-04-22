@@ -9,7 +9,7 @@ require 'json'
 Puppet::Functions.create_function(:'deployments::pr_reviewer') do
   dispatch :pr_reviewer do
     required_param 'Hash', :repo
-    required_param 'String', :pr_number
+    required_param 'Integer', :pr_number
   end
 
   def pr_reviewer(repo, pr_number)
