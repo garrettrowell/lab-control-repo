@@ -182,6 +182,8 @@ plan deployments::servicenow_integration(
 
   # Trigger Change Request workflow in ServiceNow DevOps
   cd4pe_deployments::create_custom_deployment_event('Creating ServiceNow Change Request...')
+  cd4pe_deployments::create_custom_deployment_event("gl_now_usermap: ${gl_now_usermap}")
+
   deployments::servicenow_change_request(
     $_now_endpoint,
     $proxy,
@@ -198,6 +200,6 @@ plan deployments::servicenow_integration(
     $ia_csv['csv'],
     $gl_endpoint,
     $gl_oauth_token,
-    $gl_now_usermap,
+    #    $gl_now_usermap,
   )
 }
