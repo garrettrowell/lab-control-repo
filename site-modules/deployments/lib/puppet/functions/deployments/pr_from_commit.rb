@@ -15,7 +15,7 @@ Puppet::Functions.create_function(:'deployments::pr_from_commit') do
     request_response = make_request(request_uri, :get)
     call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{JSON.parse(request_response)}")
   end
- 
+
   def make_request(endpoint, type, payload = nil, content_type = 'application/json')
     uri = URI.parse(endpoint)
     max_attempts = 3
