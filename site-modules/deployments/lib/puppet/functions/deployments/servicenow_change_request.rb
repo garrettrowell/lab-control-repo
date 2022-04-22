@@ -201,7 +201,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
-      data[:sys_user] = user_id
+      data[:assigned_to] = user_id
       data[:start_date] = start_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:end_date] = end_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:state] = 'assess'
