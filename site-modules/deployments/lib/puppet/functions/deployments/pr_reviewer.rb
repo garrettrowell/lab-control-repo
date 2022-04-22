@@ -5,6 +5,7 @@ require 'uri'
 require 'cgi'
 require 'json'
 
+
 Puppet::Functions.create_function(:'deployments::pr_reviewer') do
   dispatch :pr_reviewer do
     required_param 'Hash', :repo
