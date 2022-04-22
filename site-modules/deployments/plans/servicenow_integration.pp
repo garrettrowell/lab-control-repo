@@ -143,12 +143,6 @@ plan deployments::servicenow_integration(
     $ia_csv = {'csv'=>'No Impact Analysis performed'}
   }
 
-  $repo = {
-    owner    => 'garrettrowell', # owner of the repo in github
-    name     => $repo_name,
-    commit   => $commit_sha,
-  }
-
   # Combine all reports into a single hash
   $report = deployments::combine_reports($stage_report, $scm_data, $ia_envs_report)
 
