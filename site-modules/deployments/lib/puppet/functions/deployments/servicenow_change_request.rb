@@ -24,13 +24,14 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     required_param 'String',    :gl_endpoint
     required_param 'Sensitive', :gl_oauth_token
     required_param 'String',    :gl_now_usermap
+    required_param 'Integer',   :change_window_seconds
   end
 
-  def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export, gl_endpoint, gl_oauth_token, gl_now_usermap) # rubocop:disable Layout/LineLength
-#  def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export) # rubocop:disable Layout/LineLength
+  def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export, gl_endpoint, gl_oauth_token, gl_now_usermap, change_window_seconds) # rubocop:disable Layout/LineLength
 
     call_function('cd4pe_deployments::create_custom_deployment_event', "endpoint: #{gl_endpoint} token: #{gl_oauth_token} map: #{JSON.parse(gl_now_usermap).inspect}")
     usermap_json = JSON.parse(gl_now_usermap)
+
     # Map facts to populate when auto-creating CI's
     fact_map = {
       # PuppetDB fact => ServiceNow CI field
@@ -195,25 +196,15 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     assignment_group_sys_id = arr_assignment_groups[0]['sys_id']
 
     start_time = Time.now.utc
-    end_time = start_time + 345600 # add 96hrs represented as seconds
+#    end_time = start_time + 345600 # add 96hrs represented as seconds
+    end_time = start_time + change_window_seconds # add 96hrs represented as seconds
+
     call_function('cd4pe_deployments::create_custom_deployment_event', "Setting start_date: #{start_time.strftime("%Y-%m-%d %k:%M:%S")} end_date: #{end_time.strftime("%Y-%m-%d %k:%M:%S")} stz: #{start_time.zone} etz: #{end_time.zone}")
-
-    # Get sys_id of a user
-#    usermap = {
-#     'Santa' => 'Change Manager'
-#    }
-
-#    aname = 'Change Manager'
-#    user_url = "#{endpoint}/api/now/table/sys_user?sysparm_query%3Duser_name=#{aname}&sysparm_fields=sys_id&sysparm_limit=1"
-#    user_response = make_request(user_url, :get, proxy, username, password, oauth_token)
-#    user_id = JSON.parse(user_response.body)['result'][0]['sys_id']
-#    call_function('cd4pe_deployments::create_custom_deployment_event', "user_id: #{user_id}")
 
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
-#      data[:assigned_to] = usermap[report['scm']['merge_approver']] if usermap.key?(report['scm']['merge_approver'])
-      data[:assigned_to] = usermap_json[report['scm']['merge_approver']] if usermap_json.key?(report['scm']['merge_approver'])
+      data[:assigned_to] = usermap_json[report['scm']['merge_approver']] if usermap_json.key?(report['scm']['merge_approver']) # Assign the user if exists in mapping
       data[:start_date] = start_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:end_date] = end_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:state] = 'assess'
