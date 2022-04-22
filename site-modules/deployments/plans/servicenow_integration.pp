@@ -18,7 +18,7 @@ plan deployments::servicenow_integration(
   $commit_sha        = system::env('COMMIT')
   $control_repo_name = system::env('CONTROL_REPO_NAME')
   $module_name       = system::env('MODULE_NAME')
- 
+
   $repo_name = $repo_type ? {
     'CONTROL_REPO' => $control_repo_name,
     'MODULE' => $module_name
@@ -52,7 +52,6 @@ plan deployments::servicenow_integration(
   $pipeline_id = cd4pe_deployments::evaluate_result($pipeline_id_result)
 
   cd4pe_deployments::create_custom_deployment_event("pipeline_id_result: ${pipeline_id_result} pipeline_id: ${pipeline_id}")
-
 
   # Loop until items in the pipeline stage are done
   $loop_result = ctrl::do_until('limit'=>80) || {
@@ -144,7 +143,9 @@ plan deployments::servicenow_integration(
   }
 
   #testing getting PR approver from GH
-  $pull_info = deployments::pr_from_commit($repo)
+  $pull_number = deployments::pr_from_commit($repo)
+  cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
+
   #  $pull_approver = deployments::pr_approver($repo)
 
   # Combine all reports into a single hash
