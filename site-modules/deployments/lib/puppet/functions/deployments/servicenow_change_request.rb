@@ -23,13 +23,14 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     required_param 'String',    :ia_csv_export
     required_param 'String',    :gl_endpoint
     required_param 'Sensitive', :gl_oauth_token
-    required_param 'String',      :gl_now_usermap
+    required_param 'String',    :gl_now_usermap
   end
 
   def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export, gl_endpoint, gl_oauth_token, gl_now_usermap) # rubocop:disable Layout/LineLength
 #  def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export) # rubocop:disable Layout/LineLength
 
     call_function('cd4pe_deployments::create_custom_deployment_event', "endpoint: #{gl_endpoint} token: #{gl_oauth_token} map: #{JSON.parse(gl_now_usermap).inspect}")
+    usermap_json = JSON.parse(gl_now_usermap)
     # Map facts to populate when auto-creating CI's
     fact_map = {
       # PuppetDB fact => ServiceNow CI field
@@ -198,9 +199,9 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     call_function('cd4pe_deployments::create_custom_deployment_event', "Setting start_date: #{start_time.strftime("%Y-%m-%d %k:%M:%S")} end_date: #{end_time.strftime("%Y-%m-%d %k:%M:%S")} stz: #{start_time.zone} etz: #{end_time.zone}")
 
     # Get sys_id of a user
-    usermap = {
-     'Santa' => 'Change Manager'
-    }
+#    usermap = {
+#     'Santa' => 'Change Manager'
+#    }
 
 #    aname = 'Change Manager'
 #    user_url = "#{endpoint}/api/now/table/sys_user?sysparm_query%3Duser_name=#{aname}&sysparm_fields=sys_id&sysparm_limit=1"
@@ -211,7 +212,8 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
-      data[:assigned_to] = usermap[report['scm']['merge_approver']] if usermap.key?(report['scm']['merge_approver'])
+#      data[:assigned_to] = usermap[report['scm']['merge_approver']] if usermap.key?(report['scm']['merge_approver'])
+      data[:assigned_to] = usermap_json[report['scm']['merge_approver']] if usermap_json.key?(report['scm']['merge_approver'])
       data[:start_date] = start_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:end_date] = end_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:state] = 'assess'
