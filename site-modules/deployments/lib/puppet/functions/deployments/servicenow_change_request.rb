@@ -195,7 +195,8 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     aname = 'beth.anglin'
     user_url = "#{endpoint}/api/now/table/sys_user?sysparm_query%3Duser_name=#{aname}&sysparm_fields=sys_id&sysparm_limit=1"
     user_response = make_request(user_url, :get, proxy, username, password, oauth_token)
-    call_function('cd4pe_deployments::create_custom_deployment_event', "user_response: #{user_response}")
+    user_id = JSON.parse(user_response.body)
+    call_function('cd4pe_deployments::create_custom_deployment_event', "user_id: #{user_id}")
 
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
