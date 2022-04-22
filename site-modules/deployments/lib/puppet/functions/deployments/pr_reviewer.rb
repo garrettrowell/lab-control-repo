@@ -17,11 +17,11 @@ Puppet::Functions.create_function(:'deployments::pr_reviewer') do
     request_response = make_request(request_uri, :get)
     body = JSON.parse(request_response.body)
     call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{body}")
-#    pr_number = body[0]['number']
-#    call_function('cd4pe_deployments::create_custom_deployment_event', ": #{pr_number}")
-#    return pr_number
+    user_login = body[0]['user']['login']
+    call_function('cd4pe_deployments::create_custom_deployment_event', "approver: #{user_login}")
+    return user_login
   end
- 
+
   def make_request(endpoint, type, payload = nil, content_type = 'application/json')
     uri = URI.parse(endpoint)
     max_attempts = 3
