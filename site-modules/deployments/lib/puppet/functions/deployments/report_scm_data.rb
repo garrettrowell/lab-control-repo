@@ -16,6 +16,7 @@ Puppet::Functions.create_function(:'deployments::report_scm_data') do
     report['scm']['changes']     = []
     report['scm']['culprits']    = []
     report['scm']['description'] = pipeline['description']
+#    report['scm']['commit_author'] = pipeline[]
     report
   end
 end

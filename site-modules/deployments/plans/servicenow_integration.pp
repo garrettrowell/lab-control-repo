@@ -144,7 +144,7 @@ plan deployments::servicenow_integration(
   }
 
   #testing getting PR approver from GH
-  #$pull_info = deployments::pr_from_commit($repo)
+  $pull_info = deployments::pr_from_commit($repo)
   #  $pull_approver = deployments::pr_approver($repo)
 
   # Combine all reports into a single hash
