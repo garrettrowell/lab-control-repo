@@ -74,7 +74,7 @@ plan deployments::servicenow_integration(
     $pull_number = deployments::pr_from_commit($repo)
     cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
     $pull_approver = deployments::pr_reviewer($repo, $pull_number)
-
+    cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
     # If $report_stage is set, set the stage number by searching the pipeline output
     if $report_stage {
