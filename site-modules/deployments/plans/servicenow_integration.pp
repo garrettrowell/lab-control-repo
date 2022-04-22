@@ -15,6 +15,7 @@ plan deployments::servicenow_integration(
   Optional[String] $gl_endpoint = undef,
   Sensitive $gl_oauth_token = Sensitive(''),
   Optional[String] $gl_now_usermap = undef,
+  Optional[Integer] $change_window_seconds = 345600,
 ){
   # Read relevant CD4PE environment variables
   $repo_type         = system::env('REPO_TYPE')
