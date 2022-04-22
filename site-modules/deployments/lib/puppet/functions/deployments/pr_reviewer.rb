@@ -17,7 +17,14 @@ Puppet::Functions.create_function(:'deployments::pr_reviewer') do
     request_response = make_request(request_uri, :get)
     body = JSON.parse(request_response.body)
     call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{body}")
-    user_login = body[0]['user']['login']
+
+    # Crappy error handling for when no approver
+    begin
+      user_login = body[0]['user']['login']
+    rescue
+      user_login = 'Santa'
+    end
+
     call_function('cd4pe_deployments::create_custom_deployment_event', "approver: #{user_login}")
     return user_login
   end
