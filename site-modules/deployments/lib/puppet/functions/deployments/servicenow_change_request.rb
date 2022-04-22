@@ -29,6 +29,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
   def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export, gl_endpoint, gl_oauth_token, gl_now_usermap) # rubocop:disable Layout/LineLength
 #  def servicenow_change_request(endpoint, proxy, username, password, oauth_token, report, ia_url, promote_to_stage_name, promote_to_stage_id, assignment_group, connection_alias, auto_create_ci, ia_csv_export) # rubocop:disable Layout/LineLength
 
+    call_function('cd4pe_deployments::create_custom_deployment_event', "endpoint: #{gl_enpoint} token: #{gl_oauth_token} map: #{gl_now_usermap}")
     # Map facts to populate when auto-creating CI's
     fact_map = {
       # PuppetDB fact => ServiceNow CI field
