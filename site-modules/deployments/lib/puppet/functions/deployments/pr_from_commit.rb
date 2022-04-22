@@ -13,7 +13,7 @@ Puppet::Functions.create_function(:'deployments::pr_from_commit') do
   def pr_from_commit(repo)
     request_uri = "https://api.github.com/repos/#{repo['owner']}/#{repo['name']}/commits/#{repo['commit']}/pulls"
     request_response = make_request(request_uri, :get)
-    call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{to_json(request_response.body)}")
+    call_function('cd4pe_deployments::create_custom_deployment_event', "request_response: #{JSON.parse(request_response.body)}")
   end
 
   def make_request(endpoint, type, payload = nil, content_type = 'application/json')
