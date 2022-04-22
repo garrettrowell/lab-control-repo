@@ -25,7 +25,6 @@ Puppet::Functions.create_function(:'deployments::pr_reviewer') do
       user_login = 'Santa'
     end
 
-    call_function('cd4pe_deployments::create_custom_deployment_event', "approver: #{user_login}")
     return user_login
   end
 
