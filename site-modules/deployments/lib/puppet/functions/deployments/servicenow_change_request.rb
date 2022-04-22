@@ -194,7 +194,11 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     call_function('cd4pe_deployments::create_custom_deployment_event', "Setting start_date: #{start_time.strftime("%Y-%m-%d %k:%M:%S")} end_date: #{end_time.strftime("%Y-%m-%d %k:%M:%S")} stz: #{start_time.zone} etz: #{end_time.zone}")
 
     # Get sys_id of a user
-    aname = 'Beth Anglin'
+    usermap = {
+     'Santa' => 'Change Manager'
+    }
+
+#    aname = 'Change Manager'
 #    user_url = "#{endpoint}/api/now/table/sys_user?sysparm_query%3Duser_name=#{aname}&sysparm_fields=sys_id&sysparm_limit=1"
 #    user_response = make_request(user_url, :get, proxy, username, password, oauth_token)
 #    user_id = JSON.parse(user_response.body)['result'][0]['sys_id']
@@ -203,7 +207,7 @@ Puppet::Functions.create_function(:'deployments::servicenow_change_request') do
     # Update Change Request with additional info, and start the approval process
     change_req_url = "#{endpoint}/api/sn_chg_rest/v1/change/normal/#{changereq['result']['sys_id']['value']}?state=assess"
     payload = {}.tap do |data|
-      data[:assigned_to] = aname
+      data[:assigned_to] = usermap[report['scm']['merge_approver']] if usermap.key?(report['scm']['merge_approver'])
       data[:start_date] = start_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:end_date] = end_time.strftime("%Y-%m-%d %k:%M:%S")
       data[:state] = 'assess'
