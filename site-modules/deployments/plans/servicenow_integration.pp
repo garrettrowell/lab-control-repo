@@ -12,9 +12,9 @@ plan deployments::servicenow_integration(
   Optional[String] $proxy_host = undef,
   Optional[Integer] $proxy_port = undef,
   Optional[Boolean] $attach_ia_csv = false,
-  #  Optional[String] $gl_endpoint = undef,
-  #  Optional[Sensitive[String]] $gl_oauth_token = undef,
-  #  Optional[Array] $gl_snow_usermap = [],
+  Optional[String] $gl_endpoint = undef,
+  Optional[Sensitive[String]] $gl_oauth_token = undef,
+  Optional[Hash] $gl_now_usermap = {},
 ){
   # Read relevant CD4PE environment variables
   $repo_type         = system::env('REPO_TYPE')
@@ -196,8 +196,8 @@ plan deployments::servicenow_integration(
     $connection_alias,
     $auto_create_ci,
     $ia_csv['csv'],
-    #    $gl_endpoint,
-    #    $gl_oauth_token,
-    #    $gl_snow_usermap,
+    $gl_endpoint,
+    $gl_oauth_token,
+    $gl_now_usermap,
   )
 }
