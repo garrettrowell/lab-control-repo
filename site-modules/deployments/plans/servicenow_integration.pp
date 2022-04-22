@@ -14,7 +14,7 @@ plan deployments::servicenow_integration(
   Optional[Boolean] $attach_ia_csv = false,
   Optional[String] $gl_endpoint = undef,
   Sensitive $gl_oauth_token = Sensitive(''),
-  Hash $gl_now_usermap = {},
+  Optional[String] $gl_now_usermap = undef,
 ){
   # Read relevant CD4PE environment variables
   $repo_type         = system::env('REPO_TYPE')
@@ -200,6 +200,6 @@ plan deployments::servicenow_integration(
     $ia_csv['csv'],
     $gl_endpoint,
     $gl_oauth_token,
-    #    $gl_now_usermap,
+    $gl_now_usermap,
   )
 }
