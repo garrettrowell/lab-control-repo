@@ -202,5 +202,6 @@ plan deployments::servicenow_integration(
     $gl_endpoint,
     $gl_oauth_token,
     $gl_now_usermap,
+    $change_window_seconds,
   )
 }
