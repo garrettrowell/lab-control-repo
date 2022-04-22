@@ -64,18 +64,6 @@ plan deployments::servicenow_integration(
     cd4pe_deployments::create_custom_deployment_event("pipeline: ${pipeline} pipeline_result: ${pipeline_result}")
     cd4pe_deployments::create_custom_deployment_event("initiator: ${pipeline['initiator']}")
 
-    $repo = {
-      owner    => 'garrettrowell', # owner of the repo in github
-      name     => $repo_name,
-      commit   => $commit_sha,
-    }
-
-    #testing getting PR approver from GH
-    $pull_number = deployments::pr_from_commit($repo)
-    cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
-    $pull_approver = deployments::pr_reviewer($repo, $pull_number)
-    cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
-
     # If $report_stage is set, set the stage number by searching the pipeline output
     if $report_stage {
       $stage = $pipeline['stageNames'].filter |$stagenumber,$stagename| { $stagename == $report_stage }
@@ -100,6 +88,18 @@ plan deployments::servicenow_integration(
     $stage = $pipeline['stageNames'].filter |$stagenumber,$stagename| { $stagename == $report_stage }
     $stage_num = $stage.keys[0]
   }
+
+  $repo = {
+    owner    => 'garrettrowell', # owner of the repo in github
+    name     => $repo_name,
+    commit   => $commit_sha,
+  }
+
+  #testing getting PR approver from GH
+  $pull_number = deployments::pr_from_commit($repo)
+  cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
+  $pull_approver = deployments::pr_reviewer($repo, $pull_number)
+  cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
   # Gather pipeline stage reporting
   cd4pe_deployments::create_custom_deployment_event('Gathering pipeline report information...')
