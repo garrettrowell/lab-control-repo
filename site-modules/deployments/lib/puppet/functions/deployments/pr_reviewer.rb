@@ -21,7 +21,7 @@ Puppet::Functions.create_function(:'deployments::pr_reviewer') do
 #    call_function('cd4pe_deployments::create_custom_deployment_event', ": #{pr_number}")
 #    return pr_number
   end
-
+ 
   def make_request(endpoint, type, payload = nil, content_type = 'application/json')
     uri = URI.parse(endpoint)
     max_attempts = 3
