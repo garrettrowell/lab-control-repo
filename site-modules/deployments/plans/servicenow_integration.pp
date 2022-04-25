@@ -16,6 +16,7 @@ plan deployments::servicenow_integration(
   Sensitive $gl_oauth_token = Sensitive(''),
   Optional[String] $gl_now_usermap = undef,
   Optional[Integer] $change_window_seconds = 345600,
+  String $gl_project_id = undef,
 ){
   # Read relevant CD4PE environment variables
   $repo_type         = system::env('REPO_TYPE')
@@ -94,15 +95,22 @@ plan deployments::servicenow_integration(
   }
 
   $repo = {
-    owner    => 'garrettrowell', # owner of the repo in github
-    name     => $repo_name,
-    commit   => $commit_sha,
+    name       => $repo_name,
+    commit     => $commit_sha,
+    project_id => $gl_project_id,
   }
 
   #testing getting PR approver from GH
-  $pull_number = deployments::pr_from_commit($repo)
+  #  $pull_number = deployments::pr_from_commit($repo)
+  #  cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
+  #  $pull_approver = deployments::pr_reviewer($repo, $pull_number)
+  #  cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
+
+  # PR approver from GL
+  $pull_number = deployments::gl_pr_commit($gl_endpoint, $repo, $gl_oauth_token)
+  $repo['pull_request'] = $pull_number
   cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
-  $pull_approver = deployments::pr_reviewer($repo, $pull_number)
+  $pull_approver = deployments::gl_reviewer($gl_endpoint, $repo, $gl_oauth_token)
   cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
   # Gather pipeline stage reporting
