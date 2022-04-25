@@ -19,3 +19,16 @@ puppet_enterprise::master::puppetserver::reserved_code_cache: 480m
 puppet_infrastructure_tune::metadata:
   pe_version: 2021.5.0
   tune_date: '2022-04-05'
+puppet_enterprise::profile::master::code_manager_auto_configure: true
+puppet_enterprise::master::code_manager::git_settings:
+  private-key: "/etc/puppetlabs/puppetserver/ssh/id-control_repo.ed25519"
+  repositories:
+    - remote: "git@github.com:garrettrowell/lab-control-repo.git"
+    - remote: "git@gitlab.com:gr49/control-repo.git"
+puppet_enterprise::master::code_manager::sources:
+    repo1:
+      remote: "git@github.com:garrettrowell/lab-control-repo.git"
+      prefix: false
+    repo2:
+      remote: "git@gitlab.com:gr49/control-repo.git"
+      prefix: 'gitlab'
