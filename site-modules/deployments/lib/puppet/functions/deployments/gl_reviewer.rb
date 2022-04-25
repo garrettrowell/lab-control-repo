@@ -6,15 +6,16 @@ require 'uri'
 require 'cgi'
 require 'json'
 
-Puppet::Functions.create_function(:'deployments::gl_pr_commit') do
+Puppet::Functions.create_function(:'deployments::gl_approver') do
   dispatch :gl_approver do
     required_param 'Hash', :repo
     required_param 'Sensitive', :oauth_token
     required_param 'String', :endpoint
+    required_param 'Integer', :pull_number
   end
 
   def gl_approver(endpoint, repo, oauth_token)
-    request_uri = "#{endpoint}/api/v4/projects/#{repo['project_id']}/merge_requests?iids[]=#{repo['pull_number']}"
+    request_uri = "#{endpoint}/api/v4/projects/#{repo['project_id']}/merge_requests?iids[]=#{pull_number}"
     request_response = make_request(request_uri, :get, oauth_token)
     body = JSON.parse(request_response.body)
     approver =  body[0]['merged_by']['name']
