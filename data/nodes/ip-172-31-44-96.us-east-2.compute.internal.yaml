@@ -24,11 +24,11 @@ puppet_enterprise::master::code_manager::git_settings:
   private-key: "/etc/puppetlabs/puppetserver/ssh/id-control_repo.ed25519"
   repositories:
     - remote: "git@github.com:garrettrowell/lab-control-repo.git"
-    - remote: "git@gitlab.com:gr49/control-repo.git"
+    - remote: "git@gitlab.com:gr49/lab-control-repo.git"
 puppet_enterprise::master::code_manager::sources:
     repo1:
       remote: "git@github.com:garrettrowell/lab-control-repo.git"
       prefix: false
     repo2:
-      remote: "git@gitlab.com:gr49/control-repo.git"
+      remote: "git@gitlab.com:gr49/lab-control-repo.git"
       prefix: 'gitlab'
