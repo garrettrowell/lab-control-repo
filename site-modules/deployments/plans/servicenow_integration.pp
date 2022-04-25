@@ -107,11 +107,11 @@ plan deployments::servicenow_integration(
   #  cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
   # PR approver from GL
-  $pull_number = deployments::gl_pr_commit($gl_endpoint, $repo, $gl_oauth_token)
-  $repo['pull_request'] = $pull_number
-  cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
-  $pull_approver = deployments::gl_reviewer($gl_endpoint, $repo, $gl_oauth_token)
-  cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
+  #  $pull_number = deployments::gl_pr_commit($gl_endpoint, $repo, $gl_oauth_token)
+  #  $repo['pull_request'] = $pull_number
+  #  cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
+  #  $pull_approver = deployments::gl_reviewer($gl_endpoint, $repo, $gl_oauth_token)
+  #  cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
   # Gather pipeline stage reporting
   cd4pe_deployments::create_custom_deployment_event('Gathering pipeline report information...')
