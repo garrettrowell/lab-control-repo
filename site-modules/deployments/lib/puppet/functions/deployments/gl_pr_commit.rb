@@ -8,9 +8,9 @@ require 'json'
 
 Puppet::Functions.create_function(:'deployments::gl_pr_commit') do
   dispatch :gl_pr_commit do
+    required_param 'String', :endpoint
     required_param 'Hash', :repo
     required_param 'Sensitive', :oauth_token
-    required_param 'String', :endpoint
   end
 
   def gl_pr_commit(endpoint, repo, oauth_token)
