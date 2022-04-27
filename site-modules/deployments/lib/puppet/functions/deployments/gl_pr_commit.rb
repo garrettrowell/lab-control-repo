@@ -5,23 +5,25 @@ require 'net/http'
 require 'uri'
 require 'cgi'
 require 'json'
+require 'base64'
 
 Puppet::Functions.create_function(:'deployments::gl_pr_commit') do
   dispatch :gl_pr_commit do
     required_param 'String', :endpoint
     required_param 'Hash', :repo
     required_param 'Sensitive', :oauth_token
+    required_param 'String', :base64_cert
   end
 
-  def gl_pr_commit(endpoint, repo, oauth_token)
+  def gl_pr_commit(endpoint, repo, oauth_token, base64_cert)
     request_uri = "#{endpoint}/api/v4/projects/#{repo['project_id']}/repository/commits/#{repo['commit']}/merge_requests"
-    request_response = make_request(request_uri, :get, oauth_token)
+    request_response = make_request(request_uri, :get, oauth_token, base64_cert)
     body = JSON.parse(request_response.body)
     pr_number = body[0]['iid']
     return pr_number
   end
 
-  def make_request(endpoint, type, oauth_token, payload = nil, content_type = 'application/json')
+  def make_request(endpoint, type, oauth_token, base64_cert = nil, payload = nil, content_type = 'application/json')
     uri = URI.parse(endpoint)
     max_attempts = 3
     attempts = 0
@@ -53,6 +55,16 @@ Puppet::Functions.create_function(:'deployments::gl_pr_commit') do
         request['Accept'] = 'application/json'
         connection = Net::HTTP.new(uri.host, uri.port)
         connection.use_ssl = true if uri.scheme == 'https'
+
+        unless base64_cert.nil?
+          store = OpenSSL::X509::Store.new
+          store.set_default_paths
+          decoded_cert = Base64.decode64(base64_cert)
+          certificate = OpenSSL::X509::Certificate.new(decoded_cert)
+          store.add_cert(certificate)
+          connection.cert_store = store
+        end
+
         connection.read_timeout = 60
         response = connection.request(request)
       rescue SocketError => e

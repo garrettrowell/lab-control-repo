@@ -17,6 +17,7 @@ plan deployments::servicenow_integration(
   Optional[String] $gl_now_usermap = undef,
   Optional[Integer] $change_window_seconds = 345600,
   String $gl_project_id = undef,
+  String $gl_base64_cert = undef,
 ){
   # Read relevant CD4PE environment variables
   $repo_type         = system::env('REPO_TYPE')
@@ -107,9 +108,9 @@ plan deployments::servicenow_integration(
   #  cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
   # PR approver from GL
-  $pull_number = deployments::gl_pr_commit($gl_endpoint, $repo, $gl_oauth_token)
+  $pull_number = deployments::gl_pr_commit($gl_endpoint, $repo, $gl_oauth_token, $gl_base64_cert)
   cd4pe_deployments::create_custom_deployment_event("PR_number: ${pull_number}")
-  $pull_approver = deployments::gl_approver($gl_endpoint, $repo, $gl_oauth_token, $pull_number)
+  $pull_approver = deployments::gl_approver($gl_endpoint, $repo, $gl_oauth_token, $pull_number, $gl_base64_cert)
   cd4pe_deployments::create_custom_deployment_event("Approver: ${pull_approver}")
 
   # Gather pipeline stage reporting
