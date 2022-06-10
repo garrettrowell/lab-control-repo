@@ -77,7 +77,7 @@ class profile::windows (
   # Service Accounts
   dsc_serviceset { 'pxp-agent':
     dsc_name           => ['pxp-agent'],
-    name               => 'pxp-agent',
+    name               => ['pxp-agent'],
     dsc_builtinaccount => undef,
     dsc_credential     => {
       user     => 'serviceaccount',
