@@ -67,7 +67,7 @@ class profile::windows (
     dsc_ensure   => 'Present',
     dsc_password => {
       user     => 'serviceaccount',
-      password => 'imatest',
+      password => Sensitive('imatest'),
     },
   }
 
@@ -75,7 +75,7 @@ class profile::windows (
   dsc_service { 'pxp-agent':
     dsc_credential => {
       user     => 'serviceaccount',
-      password => 'imatest',
+      password => Sensitive('imatest'),
     },
   }
 }
