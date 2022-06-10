@@ -37,8 +37,18 @@ class profile::windows (
   }
 
   # Disable UAC
-  dsc_useraccountcontrol { 'Disable_UAC':
-    dsc_enablelua        => '0',
-    dsc_issingleinstance => 'Yes',
-  }
+  # Warning: Provider returned data that does not match the Type Schema for `dsc_useraccountcontrol[foo]`
+  # Value type mismatch:
+  #    * dsc_consentpromptbehavioradmin: 5 (expects an undef value or a match for Enum['0', '1', '2', '3', '4', '5'], got Integer)
+  #    * dsc_consentpromptbehavioruser: 3 (expects an undef value or a match for Enum['0', '1', '3'], got Integer)
+  #    * dsc_enableinstallerdetection: 1 (expects an undef value or a match for Enum['0', '1'], got Integer)
+  #    * dsc_enablelua: 1 (expects an undef value or a match for Enum['0', '1'], got Integer)
+  #    * dsc_enablevirtualization: 1 (expects an undef value or a match for Enum['0', '1'], got Integer)
+  #    * dsc_promptonsecuredesktop: 1 (expects an undef value or a match for Enum['0', '1'], got Integer)
+  #    * dsc_validateadmincodesignatures: 0 (expects an undef value or a match for Enum['0', '1'], got Integer)
+  #
+  #dsc_useraccountcontrol { 'Disable_UAC':
+  #  dsc_enablelua        => '0',
+  #  dsc_issingleinstance => 'Yes',
+  #}
 }

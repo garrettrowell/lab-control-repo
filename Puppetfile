@@ -30,6 +30,7 @@ mod 'puppetlabs-ruby_task_helper', '0.6.0'
 mod 'dsc-xdscfirewall', '1.6.21-0-0'
 mod 'dsc-networkingdsc', '8.2.0-0-3'
 mod 'dsc-computermanagementdsc', '8.5.0-0-0'
+mod 'dsc-indented_securitypolicy', '1.3.2-0-0'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
