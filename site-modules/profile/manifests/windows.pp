@@ -76,6 +76,7 @@ class profile::windows (
 
   # Service Accounts
   dsc_service { 'pxp-agent':
+    dsc_name       => 'pxp-agent',
     dsc_credential => {
       user     => 'serviceaccount',
       password => Sensitive('pfq3bpMR6JpdzWeu'),
