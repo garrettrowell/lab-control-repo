@@ -1,19 +1,15 @@
 class profile::windows (
-){
+  String $iamtest = 'cool',
+) {
   $domain_firewall_enabled  = 'false'
   $private_firewall_enabled = 'false'
   $public_firewall_enabled  = 'false'
 
-  $d_f_e = $domain_firewall_enabled ? {
-    'true'  => 'Present',
-    'false' => 'Absent',
+  dsc_firewallprofile { 'Disable_Windows_Firewall-Domain':
+    dsc_name   => 'Domain',
+    dsc_enable => capitalize($domain_firewall_enabled),
   }
 
-  #  dsc_xdscfirewall { 'Domain':
-  #    dsc_ensure => $d_f_e,
-  #    dsc_zone   => 'Domain',
-  #  }
-  #  dsc_netadapterbinding 'DisableIPv6' dsc_componentid='ms_tcpip6' dsc_interfacealias='Ethernet'
   dsc_netadapterbinding { 'DisableIPv6':
     dsc_componentid    => 'ms_tcpip6',
     dsc_interfacealias => '*',
