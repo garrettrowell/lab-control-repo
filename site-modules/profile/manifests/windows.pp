@@ -35,4 +35,10 @@ class profile::windows (
     dsc_timezone         => 'Central Standard Time',
     dsc_issingleinstance => 'Yes',
   }
+
+  # Disable UAC
+  dsc_useraccountcontrol { 'Disable_UAC':
+    dsc_enablelua        => '0',
+    dsc_issingleinstance => 'Yes',
+  }
 }
