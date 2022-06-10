@@ -17,5 +17,6 @@ class profile::windows (
   dsc_netadapterbinding { 'DisableIPv6':
     dsc_componentid    => 'ms_tcpip6',
     dsc_interfacealias => '*',
+    dsc_state          => 'Disabled',
   }
 }
