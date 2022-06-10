@@ -51,4 +51,9 @@ class profile::windows (
   #  dsc_enablelua        => '0',
   #  dsc_issingleinstance => 'Yes',
   #}
+  dsc_securityoption { 'Disable_UAC':
+    dsc_ensure => 'Present',
+    dsc_name   => 'EnableLUA',
+    dsc_value  => ['Disabled'],
+  }
 }
