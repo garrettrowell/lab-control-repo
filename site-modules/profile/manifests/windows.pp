@@ -9,6 +9,14 @@ class profile::windows (
     dsc_name    => 'Domain',
     dsc_enabled => capitalize($domain_firewall_enabled),
   }
+  dsc_firewallprofile { 'Disable_Windows_Firewall-Private':
+    dsc_name    => 'Private',
+    dsc_enabled => capitalize($private_firewall_enabled),
+  }
+  dsc_firewallprofile { 'Disable_Windows_Firewall-Public':
+    dsc_name    => 'Public',
+    dsc_enabled => capitalize($public_firewall_enabled),
+  }
 
   dsc_netadapterbinding { 'DisableIPv6':
     dsc_componentid    => 'ms_tcpip6',
