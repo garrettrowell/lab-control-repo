@@ -63,7 +63,10 @@ class profile::windows (
   }
 
   dsc_user { 'serviceaccount':
+    name         => 'serviceaccount',
+    dsc_disabled => false,
     dsc_username => 'serviceaccount',
+    dsc_fullname => 'serviceaccount',
     dsc_ensure   => 'Present',
     dsc_password => {
       user     => 'serviceaccount',
