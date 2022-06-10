@@ -56,4 +56,9 @@ class profile::windows (
     dsc_name   => 'EnableLUA',
     dsc_value  => ['Disabled'],
   }
+
+  # Enable RDP
+  dsc_xremotedesktopadmin { 'Enable_RDP':
+    dsc_ensure => 'Present',
+  }
 }
