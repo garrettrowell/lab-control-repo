@@ -32,6 +32,7 @@ mod 'dsc-networkingdsc', '8.2.0-0-3'
 mod 'dsc-computermanagementdsc', '8.5.0-0-0'
 mod 'dsc-indented_securitypolicy', '1.3.2-0-0'
 mod 'dsc-xremotedesktopadmin', '1.1.0-0-1'
+mod 'dsc-psdscresources', '2.12.0-0-4'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
