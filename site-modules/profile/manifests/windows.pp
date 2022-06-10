@@ -9,8 +9,13 @@ class profile::windows (
     'false' => 'Absent',
   }
 
-  dsc_xdscfirewall { 'Domain':
-    dsc_ensure => $d_f_e,
-    dsc_zone   => 'Domain',
+  #  dsc_xdscfirewall { 'Domain':
+  #    dsc_ensure => $d_f_e,
+  #    dsc_zone   => 'Domain',
+  #  }
+  #  dsc_netadapterbinding 'DisableIPv6' dsc_componentid='ms_tcpip6' dsc_interfacealias='Ethernet'
+  dsc_netadapterbinding { 'DisableIPv6':
+    dsc_componentid    => 'ms_tcpip6',
+    dsc_interfacealias => '*',
   }
 }
