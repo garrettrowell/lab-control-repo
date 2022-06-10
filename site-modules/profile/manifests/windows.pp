@@ -6,8 +6,8 @@ class profile::windows (
   $public_firewall_enabled  = 'false'
 
   dsc_firewallprofile { 'Disable_Windows_Firewall-Domain':
-    dsc_name   => 'Domain',
-    dsc_enable => capitalize($domain_firewall_enabled),
+    dsc_name    => 'Domain',
+    dsc_enabled => capitalize($domain_firewall_enabled),
   }
 
   dsc_netadapterbinding { 'DisableIPv6':
