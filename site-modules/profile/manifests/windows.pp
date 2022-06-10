@@ -31,4 +31,8 @@ class profile::windows (
   }
 
   # Set Timezone
+  dsc_timezone { 'Set Timezone':
+    dsc_timezone         => 'Central Standard Time',
+    dsc_issingleinstance => 'Yes',
+  }
 }
