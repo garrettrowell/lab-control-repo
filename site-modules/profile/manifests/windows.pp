@@ -75,7 +75,7 @@ class profile::windows (
   }
 
   # Service Accounts
-  service { 'pxp-agent':
+  Service <| title == 'pxp-agent' |> {
     logonaccount  => 'serviceaccount',
     logonpassword => Sensitive('pfq3bpMR6JpdzWeu'),
   }
