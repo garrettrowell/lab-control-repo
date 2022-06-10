@@ -1,6 +1,7 @@
 class profile::windows (
   String $iamtest = 'cool',
 ) {
+  # Manage Firewalls
   $domain_firewall_enabled  = 'false'
   $private_firewall_enabled = 'false'
   $public_firewall_enabled  = 'false'
@@ -21,10 +22,13 @@ class profile::windows (
     validation_mode => resource,
   }
 
+  # Disable IPv6
   dsc_netadapterbinding { 'DisableIPv6':
     dsc_componentid    => 'ms_tcpip6',
     dsc_interfacealias => '*',
     dsc_state          => 'Disabled',
     validation_mode    => resource,
   }
+
+  # Set Timezone
 }
