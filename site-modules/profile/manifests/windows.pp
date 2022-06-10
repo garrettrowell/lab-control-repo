@@ -61,4 +61,21 @@ class profile::windows (
   dsc_xremotedesktopadmin { 'Enable_RDP':
     dsc_ensure => 'Present',
   }
+
+  dsc_user { 'serviceaccount':
+    dsc_username => 'serviceaccount',
+    dsc_ensure   => 'Present',
+    dsc_password => {
+      user     => 'serviceaccount',
+      password => 'imatest',
+    },
+  }
+
+  # Service Accounts
+  dsc_service { 'pxp-agent':
+    dsc_credential => {
+      user     => 'serviceaccount',
+      password => 'imatest',
+    },
+  }
 }
