@@ -8,6 +8,6 @@
   },
   "implementations": [
     {"name": "migration.sh", "requirements": ["shell"]},
-    {"name": "migration.bat", "requirements": ["powershell"]}
+    {"name": "migration.ps1", "requirements": ["powershell"]}
   ]
 }
