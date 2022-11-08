@@ -5,10 +5,12 @@ $version = (puppet --version)
 $ssldir = (puppet config print ssldir)
 $statedir = (puppet config print statedir)
 
-Write-Output "server: $server`"
-Write-Output "ssldir: $ssldir`"
-Write-Output "statedir: $statedir`"
-Write-Output "version: $version`"
+$testing = get-command puppet
+Write-Output "testing: $testing"
+Write-Output "server: $server"
+Write-Output "ssldir: $ssldir"
+Write-Output "statedir: $statedir"
+Write-Output "version: $version"
 
 # stop the service
 #puppet resource service puppet ensure=stopped
