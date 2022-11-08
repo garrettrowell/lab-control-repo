@@ -47,10 +47,10 @@ node default {
 
     class { ::autosign:
       ensure     => 'latest',
-      configfile => '/etc/puppetlabs/puppet/autosign.conf',
+      #      configfile => '/etc/puppetlabs/puppet/autosign.conf',
       config     => {
         'general' => {
-          'loglevel' => 'INFO',
+          'loglevel' => 'DEBUG',
         },
         'jwt_token' => {
           'secret'   => 'hunter2'
