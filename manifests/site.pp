@@ -67,11 +67,17 @@ node default {
   } else {
 
     $should_be_a_lookup = 'hunter2'
+    $csr_attr = "${facts['puppet_confdir']}/csr_attributes.yaml"
+
+    file { $csr_attr:
+      ensure =>  present,
+    }
 
     file_line {
       default:
         ensure => present,
-        path   => "${facts['puppet_confdir']}/csr_attributes.yaml",
+        path   => $csr_attr,
+        require => File[$csr_attr],
       ;
       'custom_attributes':
         line => 'custom_attributes:',
