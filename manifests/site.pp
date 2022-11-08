@@ -70,7 +70,7 @@ node default {
     file_line {
       default:
         ensure => present,
-        path   => "${facts['puppet_confdir']/csr_attributes.yaml",
+        path   => "${facts['puppet_confdir']}/csr_attributes.yaml",
       ;
       'custom_attributes':
         line => 'custom_attributes:',
