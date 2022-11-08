@@ -35,6 +35,7 @@ node default {
   }
 
   include profile::base
+
   if $trusted['certname'] == 'garrett.rowell-pe-primary' {
     #    ini_setting { 'policy-based autosigning':
     #      setting     => 'autosign',
@@ -62,6 +63,25 @@ node default {
       },
       notify      => Service['pe-puppetserver'],
     }
+  } else {
+
+    $should_be_a_lookup = 'hunter2'
+
+    file_line {
+      default:
+        ensure => present,
+        path   => '/etc/puppetlabs/puppet/csr_attributes.yaml',
+      ;
+      'custom_attributes':
+        line => 'custom_attributes:',
+        before => File_line['challengePassword'],
+      ;
+      'challengePassword':
+        line => "  challengePassword: \"${should_be_a_lookup}\"",
+        after => '^custom_attributes',
+      ;
+    }
+
   }
 
 }
