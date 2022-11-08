@@ -1,5 +1,5 @@
 # Useful locations
-$ssldir = (puppet config print ssldir)
+$ssldir = puppet config print ssldir | Out-String
 $statedir = (puppet config print statedir)
 
 Write-Output $ssldir
