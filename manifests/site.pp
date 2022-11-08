@@ -44,6 +44,7 @@ node default {
       value   => '/opt/puppetlabs/puppet/bin/autosign-validator',
       notify  => Service['pe-puppetserver'],
     }
+
     #    class { 'puppet_agent':
     #      config => [
     #        {section => server, setting => autosign, value => '/opt/puppetlabs/puppet/bin/autosign-validator'},
