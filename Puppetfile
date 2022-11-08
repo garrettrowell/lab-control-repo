@@ -35,6 +35,7 @@ mod 'dsc-xremotedesktopadmin', '1.1.0-0-1'
 mod 'dsc-psdscresources', '2.12.0-0-4'
 mod 'danieldreier-autosign', '0.3.0'
 mod 'puppetlabs-inifile', '5.4.0'
+mod 'puppetlabs-puppet_agent', '4.12.1'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
