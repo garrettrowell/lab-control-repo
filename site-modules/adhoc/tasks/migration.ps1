@@ -1,7 +1,7 @@
 param ($server)
 
 # Useful locations
-$ssldir = (puppet config print ssldir)
+$ssldir = ('puppet config print ssldir')
 $statedir = (puppet config print statedir)
 
 Write-Output "server: $server"
