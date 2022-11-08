@@ -1,6 +1,6 @@
 # Useful locations
-$ssldir = puppet config print ssldir | Out-String
-$statedir = (puppet config print statedir)
+$ssldir = puppet config print ssldir
+$statedir = puppet config print statedir
 
 Write-Output $ssldir
 # stop the service
