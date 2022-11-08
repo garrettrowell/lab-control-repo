@@ -52,8 +52,8 @@ node default {
         'general' => {
           'loglevel' => 'DEBUG',
         },
-        'jwt_token' => {
-          'secret'   => 'hunter2'
+        'password_list' => {
+          'password'   => 'hunter2'
         }
       },
     }
