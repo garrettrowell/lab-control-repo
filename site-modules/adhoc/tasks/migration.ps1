@@ -1,6 +1,6 @@
 # Useful locations
-$ssldir = puppet config print ssldir
-$statedir = puppet config print statedir
+$ssldir = @(puppet config print ssldir)
+$statedir = @(puppet config print statedir)
 
 # stop the service
 puppet resource service puppet ensure=stopped
