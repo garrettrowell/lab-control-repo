@@ -36,12 +36,18 @@ node default {
 
   include profile::base
   if $trusted['certname'] == 'garrett.rowell-pe-primary' {
-    ini_setting { 'policy-based autosigning':
-      setting     => 'autosign',
-      path        => '/etc/puppetlabs/puppet/puppet.conf',
-      section     => 'server',
-      value       => '/opt/puppetlabs/puppet/bin/autosign-validator',
-      notify      => Service['pe-puppetserver'],
+    #    ini_setting { 'policy-based autosigning':
+    #      setting     => 'autosign',
+    #      path        => '/etc/puppetlabs/puppet/puppet.conf',
+    #      section     => 'server',
+    #      value       => '/opt/puppetlabs/puppet/bin/autosign-validator',
+    #      notify      => Service['pe-puppetserver'],
+    #    }
+    class { 'puppet_agent':
+      config => [
+        {section => server, setting => autosign, value => '/opt/puppetlabs/puppet/bin/autosign-validator'},
+      ],
+      notify => Service['pe-puppetserver'],
     }
 
     class { ::autosign:
