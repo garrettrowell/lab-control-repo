@@ -6,6 +6,7 @@ $ssldir = (puppet config print ssldir)
 $statedir = (puppet config print statedir)
 
 $testing = get-command puppet
+Write-Output (puppet --version)
 Write-Output "testing: $testing"
 Write-Output "server: $server"
 Write-Output "ssldir: $ssldir"
