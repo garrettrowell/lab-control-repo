@@ -1,10 +1,13 @@
 param ($server)
 
 # Useful locations
-$ssldir = puppet config print ssldir
-$statedir = puppet config print statedir
+$ssldir = (puppet config print ssldir)
+$statedir = (puppet config print statedir)
 
-Write-Output $server
+Write-Output "server: $server"
+Write-Output "ssldir: $ssldir"
+Write-Output "statedir: $statedir"
+
 # stop the service
 #puppet resource service puppet ensure=stopped
 #
