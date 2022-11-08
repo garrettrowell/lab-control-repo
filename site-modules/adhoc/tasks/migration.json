@@ -1,0 +1,10 @@
+{
+  "description": "migration script to new puppetserver",
+  "input_method": "stdin",
+  "parameters": {
+    "server": {
+      "description": "new server to migrate to",
+      "type": "String[1]"
+    }
+  }
+}
