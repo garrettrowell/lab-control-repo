@@ -4,10 +4,10 @@
     "server": {
       "description": "new server to migrate to",
       "type": "String[1]"
-    },
-    "implementations": [
+    }
+  },
+  "implementations": [
     {"name": "migration.sh", "requirements": ["shell"]},
     {"name": "migration.ps1", "requirements": ["powershell"]}
   ]
-  }
 }
