@@ -39,7 +39,7 @@ node default {
     ini_setting { 'policy-based autosigning':
       setting     => 'autosign',
       path        => '/etc/puppetlabs/puppet/puppet.conf',
-      section     => 'master',
+      section     => 'server',
       value       => '/opt/puppetlabs/puppet/bin/autosign-validator',
       notify      => Service['pe-puppetserver'],
     }
@@ -51,7 +51,7 @@ node default {
           'loglevel' => 'DEBUG',
         },
         'password_list' => {
-          'password'   => 'hunter2'
+          'password' => 'hunter2'
         }
       },
       notify      => Service['pe-puppetserver'],
