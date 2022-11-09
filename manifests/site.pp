@@ -36,6 +36,11 @@ node default {
 
   include profile::base
 
+  # should auto grab version from PE Primary
+  class { 'puppet_agent':
+    package_version => '7.18.0',
+  }
+
   if $trusted['certname'] == 'garrett.rowell-pe-primary' {
     ini_setting { 'policy-based autosigning':
       setting => 'autosign',
