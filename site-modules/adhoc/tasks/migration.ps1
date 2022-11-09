@@ -16,7 +16,7 @@ Write-Output "statedir: $statedir"
 #Write-Output "version: $version"
 
 # stop the service
-$puppet_bin_dir\puppet resource service puppet ensure=stopped
+& $puppet_bin_dir\puppet resource service puppet ensure=stopped
 #
 #Write-Host $ssldir
 #
