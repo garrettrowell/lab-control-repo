@@ -1,9 +1,12 @@
 [CmdletBinding()]
 param ($server)
 
+$puppet_bin_dir = Join-Path ([Environment]::GetFolderPath('ProgramFiles')) 'Puppet Labs\Puppet\bin'
+
+$ssldir = & $puppet_bin_dir\puppet config print ssldir
 # Useful locations
 #$version = (puppet --version)
-$ssldir = @{puppet config print ssldir}
+#$ssldir = @{puppet config print ssldir}
 #$statedir = (puppet config print statedir)
 #
 #$testing = get-command puppet
