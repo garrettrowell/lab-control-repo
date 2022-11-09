@@ -3,7 +3,7 @@ param ($server)
 
 # Useful locations
 #$version = (puppet --version)
-$ssldir = (puppet config print ssldir)
+$ssldir = `puppet config print ssldir`
 #$statedir = (puppet config print statedir)
 #
 #$testing = get-command puppet
