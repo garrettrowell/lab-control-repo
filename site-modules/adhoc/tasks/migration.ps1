@@ -17,15 +17,13 @@ Write-Output "statedir: $statedir"
 
 # stop the service
 & $puppet_bin_dir\puppet resource service puppet ensure=stopped
-#
-#Write-Host $ssldir
-#
+
 ## backup ssldir and statedir
-#Move-Item -Path $ssldir -Destination ${ssldir}-bak
-#Move-Item -Path $statedir -Destination ${statedir}-bak
-#
+Move-Item -Path $ssldir -Destination "$ssldir`-bak"
+Move-Item -Path $statedir -Destination "$statedir`-bak"
+
 ## point to the new server
-puppet config set --section main server $server
-#
+& $puppet_bin_dir\puppet config set --section main server $server
+
 ## start the service again
-#puppet resource service puppet ensure=running
+& $puppet_bin_dir\puppet resource service puppet ensure=running
