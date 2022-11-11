@@ -6,7 +6,7 @@ Facter.add(:csr_attrs) do
     if File.file?(csr_attr_file)
       parsed_file = YAML.load(File.read(csr_attr_file))
       if parsed_file.key?('extension_requests')
-        parsed_file['extension_requests']
+#        parsed_file['extension_requests']
         if parsed_file['extension_requests'].key?('pp_role')
           parsed_file['extension_requests']['pp_role'].split('::')
         end # if pp_role
