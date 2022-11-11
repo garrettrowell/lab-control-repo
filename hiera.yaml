@@ -8,5 +8,8 @@ hierarchy:
   - name: "Yaml backend"
     data_hash: yaml_data
     paths:
+      - "attr/%{facts.csr_attrs[0]}/%{facts.csr_attrs[1]}/%{facts.csr_attrs[2]}.yaml"
+      - "attr/%{facts.csr_attrs[0]}/%{facts.csr_attrs[1]}.yaml"
+      - "attr/%{facts.csr_attrs[0]}.yaml"
       - "nodes/%{trusted.certname}.yaml"
       - "common.yaml"
