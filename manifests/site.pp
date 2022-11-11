@@ -41,6 +41,11 @@ node default {
   #  package_version => '7.18.0',
   #}
 
+  if $trusted['extensions']['pp_role'] != undef {
+    $to_include = regsubst($trusted['extensions']['role'], /(.+)(_)(.+)/, '\1::\3')
+    echo { $to_include: }
+  }
+
   if $trusted['certname'] == 'garrett.rowell-pe-primary' {
     ini_setting { 'policy-based autosigning':
       setting => 'autosign',
