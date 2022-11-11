@@ -45,6 +45,9 @@ node default {
   #  echo { $attr_message: }
   #  warning('youve been warned')
 
+  if $facts['pe_server_version'] == undef {
+    echo { 'hello from an agent': }
+  }
   if $trusted['extensions']['pp_role'] != undef {
     #    $to_include = regsubst($trusted['extensions']['pp_role'], /(.+)(_)(.+)/, '\1::\3')
     #    include "role::${to_include}"
