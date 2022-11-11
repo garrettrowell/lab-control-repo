@@ -41,9 +41,9 @@ node default {
   #  package_version => '7.18.0',
   #}
 
-  $attr_message = lookup('attr_message')
-  echo { $attr_message: }
-  warning('youve been warned')
+  #  $attr_message = lookup('attr_message')
+  #  echo { $attr_message: }
+  #  warning('youve been warned')
 
   if $trusted['extensions']['pp_role'] != undef {
     #    $to_include = regsubst($trusted['extensions']['pp_role'], /(.+)(_)(.+)/, '\1::\3')
