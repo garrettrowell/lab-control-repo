@@ -47,7 +47,7 @@ node default {
     $split_role = split($trusted['extensions']['pp_role'], '::')
     $to_include = size($split_role) ? {
       1       => $split_role['0'],
-      default => ${split_role['0']}_${split_role['1']}.
+      default => "${split_role['0']}_${split_role['1']}",
     }
     echo { $to_include: }
   }
