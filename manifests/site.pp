@@ -42,7 +42,7 @@ node default {
   #}
 
   if $trusted['extensions']['pp_role'] != undef {
-    $to_include = regsubst($trusted['extensions']['role'], /(.+)(_)(.+)/, '\1::\3')
+    $to_include = regsubst($trusted['extensions']['pp_role'], /(.+)(_)(.+)/, '\1::\3')
     echo { $to_include: }
   }
 
