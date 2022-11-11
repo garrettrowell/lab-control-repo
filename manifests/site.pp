@@ -42,8 +42,10 @@ node default {
   #}
 
   if $trusted['extensions']['pp_role'] != undef {
-    $to_include = regsubst($trusted['extensions']['pp_role'], /(.+)(_)(.+)/, '\1::\3')
-    echo { $to_include: }
+    #    $to_include = regsubst($trusted['extensions']['pp_role'], /(.+)(_)(.+)/, '\1::\3')
+    #    include "role::${to_include}"
+    $split_role = split($trusted['extensions']['pp_role'], '::')
+    echo { "${split_role['0']}_${split_role['1']}": }
   }
 
   if $trusted['certname'] == 'garrett.rowell-pe-primary' {
