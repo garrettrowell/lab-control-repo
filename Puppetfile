@@ -24,7 +24,6 @@ mod 'apache',
 
 mod 'puppetlabs-exec', '2.0.0'
 mod 'ipcrm-echo', '0.1.7'
-mod 'puppetlabs-ruby_task_helper', '0.6.0'
 
 # windows playing
 mod 'dsc-xdscfirewall', '1.6.21-0-0'
@@ -52,7 +51,6 @@ mod 'puppetlabs-chocolatey', '7.0.0'
 mod 'puppetlabs-registry', '4.1.1'
 mod 'puppetlabs-ruby_task_helper', '0.6.1'
 mod 'puppetlabs-java', '8.2.0'
-mod 'puppet-archive', '6.0.2'
 
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
