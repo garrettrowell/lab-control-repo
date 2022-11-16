@@ -50,7 +50,7 @@ plan adhoc::linux_users_and_groups (
   Boolean $enforce_user_netrc_mode = true,
   Pattern[/^07[0-7][0-7]$/] $user_netrc_mode = '0700',
   Boolean $purge_user_rhosts_files = true,
-  Boolean $enforce_user_init_files_umask = true
+  Boolean $enforce_user_init_files_umask = true,
   Pattern[/^7[0-7][0-7]$/] $user_init_files_umask = '077',
 ) {
   if $enforce_shadowed_passwords {
