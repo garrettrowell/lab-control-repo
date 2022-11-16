@@ -45,6 +45,15 @@ mod 'cem_linux',
   git: 'git@github.com:puppetlabs/puppetlabs-cem_linux.git',
   ref: 'v1.4.2'
 
+# Comply
+mod 'puppetlabs-comply', '2.9.0'
+mod 'puppet-archive', '6.0.2'
+mod 'puppetlabs-chocolatey', '7.0.0'
+mod 'puppetlabs-registry', '4.1.1'
+mod 'puppetlabs-ruby_task_helper', '0.6.1'
+mod 'puppetlabs-java', '8.2.0'
+mod 'puppet-archive', '6.0.2'
+
 # Modules from the Puppet Forge
 # Versions should be updated to be the latest at the time you start
 #mod 'puppetlabs/inifile', '5.0.1'
