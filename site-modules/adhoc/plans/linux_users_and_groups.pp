@@ -51,6 +51,7 @@ plan adhoc::linux_users_and_groups (
   Pattern[/^07[0-7][0-7]$/] $user_netrc_mode = '0700',
   Boolean $purge_user_rhosts_files = true,
   Boolean $enforce_user_init_files_umask = true
+  Pattern[/^7[0-7][0-7]$/] $user_init_files_umask = '077',
 ) {
   if $enforce_shadowed_passwords {
     $esp_result = run_command('sed -e \'s/^\\([a-zA-Z0-9_]*\\):[^:]*:/\\1:x:/\' -i /etc/passwd', $targets)
@@ -78,7 +79,8 @@ plan adhoc::linux_users_and_groups (
     enforce_user_netrc_mode        => $enforce_user_netrc_mode,
     user_netrc_mode                => $user_netrc_mode,
     purge_user_rhosts_files        => $purge_user_rhosts_files,
-    enforce_user_init_files_umask  =>  $enforce_user_init_files_umask,
+    enforce_user_init_files_umask  => $enforce_user_init_files_umask,
+    user_init_files_umask          => $user_init_files_umask,
   )
   $nonexistent_passwd_groups = run_task('cem_linux::audit_etcpasswd_groups', $targets)
   $duplicate_uids = run_task('cem_linux::audit_duplicate_uid', $targets)
