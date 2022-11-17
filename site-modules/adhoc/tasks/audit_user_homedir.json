@@ -1,0 +1,63 @@
+{
+  "puppet_task_version": 1,
+  "supports_noop": false,
+  "description": "Audits user homedirs on the host",
+  "input_method": "stdin",
+  "parameters": {
+    "enforce_user_homedir_mode": {
+      "description": "Whether or not to chmod homedir if it's world or group writable",
+      "type": "Boolean"
+    },
+    "user_homedir_mode": {
+      "description": "The mode to set a user's homedir to",
+      "type": "String[1]"
+    },
+    "enforce_user_homedir_ownership": {
+      "description": "Whether or not to chown homedir if not owned by user",
+      "type": "Boolean"
+    },
+    "create_user_homedir": {
+      "description": "Whether or not a user should have a homedir created for them if they don't have one",
+      "type": "Boolean"
+    },
+    "enforce_user_dotfile_mode": {
+      "description": "Whether or not to chmod dotfiles if they are world or group writable",
+      "type": "Boolean"
+    },
+    "user_dotfile_mode": {
+      "description": "The mode to set dotfiles to",
+      "type": "String[1]"
+    },
+    "purge_user_forward_files": {
+      "description": "Whether or not to purge .forward files",
+      "type": "Boolean"
+    },
+    "purge_user_netrc_files": {
+      "description": "Whether or not to purge .netrc files",
+      "type": "Boolean"
+    },
+    "enforce_user_netrc_mode": {
+      "description": "If not purged, whether or not to chmod .netrc files if they are group or world writable",
+      "type": "Boolean"
+    },
+    "user_netrc_mode": {
+      "description": "The mode to set netrc files to",
+      "type": "String[1]"
+    },
+    "enforce_user_init_files_umask": {
+      "description": "Set umask to specified value in user's init files",
+      "type": "Boolean"
+    },
+    "user_init_files_umask": {
+      "description": "The mode to set umask in user's init files to",
+      "type": "String[1]"
+    },
+    "purge_user_rhosts_files": {
+      "description": "Whether or not to purge .rhosts files",
+      "type": "Boolean"
+    }
+  },
+  "implementations": [
+    {"name": "audit_user_homedir.rb", "requirements": ["shell"]}
+  ]
+}

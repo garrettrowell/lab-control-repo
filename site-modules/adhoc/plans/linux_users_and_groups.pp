@@ -66,7 +66,7 @@ plan adhoc::linux_users_and_groups (
   $root_uid_result = run_task('cem_linux::root_uid', $targets, duplicate_uid_strategy => $duplicate_root_uid_strategy)
   $root_path_result = run_task('cem_linux::root_path_integrity', $targets)
   $user_homedir_audit = run_task(
-    'cem_linux::audit_user_homedir',
+    'adhoc::audit_user_homedir',
     $targets,
     enforce_user_homedir_mode      => $enforce_user_homedir_mode,
     user_homedir_mode              => $user_homedir_mode,
