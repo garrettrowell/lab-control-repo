@@ -131,11 +131,11 @@ def audit_homefiles(path, opts)
       files_map[:initfiles].push(f)
     end
   end
-  files_map[:dotfiles].map! { |f| audit_dotfile(f, dotfile_enforce, dotfile_mode) }.compact
-  files_map[:forward].map! { |f| audit_forward_file(f, forward_purge) }.compact
-  files_map[:netrc].map! { |f| audit_netrc_file(f, netrc_purge, netrc_enforce, netrc_mode) }.compact
-  files_map[:rhosts].map! { |f| audit_rhosts_file(f, rhosts_purge) }.compact
-  files_map[:initfiles].map! { |f| audit_user_initfile(f, initfiles_enforce, initfiles_umask) }.compact
+  files_map[:dotfiles].map! { |f| audit_dotfile(f, dotfile_enforce, dotfile_mode) }.compact!
+  files_map[:forward].map! { |f| audit_forward_file(f, forward_purge) }.compact!
+  files_map[:netrc].map! { |f| audit_netrc_file(f, netrc_purge, netrc_enforce, netrc_mode) }.compact!
+  files_map[:rhosts].map! { |f| audit_rhosts_file(f, rhosts_purge) }.compact!
+  files_map[:initfiles].map! { |f| audit_user_initfile(f, initfiles_enforce, initfiles_umask) }.compact!
   files_map
 end
 
