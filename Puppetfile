@@ -58,6 +58,9 @@ mod 'puppetlabs-java', '8.2.0'
 #mod 'puppetlabs/stdlib',  '7.0.1'
 #mod 'puppetlabs/concat',  '7.0.1'
 
+mod 'visual',
+  git: 'git@github.com:garrettrowell/puppet-visual.git'
+
 # Modules from Git
 # Examples: https://github.com/puppetlabs/r10k/blob/master/doc/puppetfile.mkd#examples
 #mod 'apache',
