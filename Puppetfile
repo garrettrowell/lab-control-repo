@@ -62,6 +62,14 @@ mod 'visual',
   git: 'git@github.com:garrettrowell/puppet-visual.git',
   branch: 'main'
 
+mod 'adviser',
+  git: 'git@github.com:puppetlabs/prosvc-adviser.git',
+  branch: 'master'
+
+mod 'module_audit',
+  git: 'git@github.com:puppetlabs/prosvc-module_audit.git',
+  branch: 'master'
+
 # Modules from Git
 # Examples: https://github.com/puppetlabs/r10k/blob/master/doc/puppetfile.mkd#examples
 #mod 'apache',
