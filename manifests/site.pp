@@ -36,7 +36,7 @@ node default {
 
   file { '/tmp/test.txt':
     ensure => present,
-    source => 'puppet:///site-modules/profile/test.txt',
+    source => 'puppet:///modules/profile/test.txt',
   }
 
   include profile::base
