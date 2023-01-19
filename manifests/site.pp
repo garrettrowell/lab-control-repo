@@ -34,6 +34,11 @@ node default {
     }
   }
 
+  file { '/tmp/test.txt':
+    ensure => present,
+    source => 'puppet:///site-modules/profile/test.txt',
+  }
+
   include profile::base
 
   # should auto grab version from PE Primary
