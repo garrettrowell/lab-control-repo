@@ -64,7 +64,7 @@ mod 'visual',
 
 mod 'adviser',
   git: 'git@github.com:garrettrowell/prosvc-adviser.git',
-  branch: 'master'
+  branch: 'feature_2023'
 
 mod 'module_audit',
   git: 'git@github.com:puppetlabs/prosvc-module_audit.git',
