@@ -63,7 +63,7 @@ mod 'visual',
   branch: 'main'
 
 mod 'adviser',
-  git: 'git@github.com:puppetlabs/prosvc-adviser.git',
+  git: 'git@github.com:garrettrowell/prosvc-adviser.git',
   branch: 'master'
 
 mod 'module_audit',
