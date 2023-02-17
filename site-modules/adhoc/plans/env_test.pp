@@ -4,14 +4,14 @@ plan adhoc::env_test(
 ) {
 
   run_command('whoami', $targets)
-  run_command('env', $targets)
+  run_command('set', $targets)
   $path = system::env('PATH')
   out::message("the path: ${path}")
 
-  run_command('export SOME_ENV_VAR=imatest', $targets)
-  run_command('env', $targets)
-  $some_env_var = system::env('SOME_ENV_VAR')
-  out::message("some_env_var: ${some_env_var}")
+#  run_command('export SOME_ENV_VAR=imatest', $targets)
+#  run_command('env', $targets)
+#  $some_env_var = system::env('SOME_ENV_VAR')
+#  out::message("some_env_var: ${some_env_var}")
  
 
 }
