@@ -34,9 +34,11 @@ node default {
     }
   }
 
-  file { '/tmp/test.txt':
-    ensure => present,
-    source => 'puppet:///modules/profile/test.txt',
+  unless $facts['os']['family'] == 'windows' {
+    file { '/tmp/test.txt':
+      ensure => present,
+      source => 'puppet:///modules/profile/test.txt',
+    }
   }
 
   include profile::base
