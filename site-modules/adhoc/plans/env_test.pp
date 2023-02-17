@@ -4,7 +4,7 @@ plan adhoc::env_test(
 ) {
 
   run_command('whoami', $targets)
-  run_command('env', $targets)
+  run_command('env', $targets, '_env_vars' => {'IMATEST' => 'true'})
 
   $path = system::env('PATH')
   out::message("the path: ${path}")
