@@ -5,5 +5,7 @@ plan adhoc::env_test(
 
   run_command('whoami', $targets)
   run_command('env', $targets)
+  $path = system::env('PATH')
+  out::message("the path: ${path}")
 
 }
