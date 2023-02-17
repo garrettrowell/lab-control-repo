@@ -3,32 +3,22 @@ plan adhoc::env_test(
   TargetSpec $targets,
 ) {
 
-  run_command('whoami', $targets)
-  run_command('export IMATEST=true & env', $targets, 'env_vars' => {'IMATEST' => 'true'})
+  $user = run_command('whoami', $targets)
+  out::message("user: ${user}")
+
+  $env_return = run_command('env', $targets, '_env_vars' => {'IMATEST' => 'true'})
+  out::message("env: ${env_return}")
 
   $path = system::env('PATH')
   out::message("the path: ${path}")
 
-  get_targets($targets).each |$target| {
-    out::message("the config: ${target.config}")
-    out::message("the facts: ${target.facts}")
-    out::message("the features: ${target.features}")
-    out::message("the host: ${target.host}")
-    out::message("the name: ${target.name}")
-    out::message("the password: ${target.password}")
-    out::message("the plugin_hooks: ${target.plugin_hooks}")
-    out::message("the port: ${target.port}")
-    out::message("the protocol: ${target.protocol}")
-    out::message("the resources: ${target.resources}")
-    out::message("the safe_name: ${target.safe_name}")
-    out::message("the target_alias: ${target.target_alias}")
-    out::message("the transport: ${target.transport}")
-    out::message("the transport_config: ${target.transport_config}")
-    out::message("the uri: ${target.uri}")
-    out::message("the user: ${target.user}")
-    out::message("the vars: ${target.vars}")
+  $imatest = system::env('IMATEST')
+  out::message("the imatest before: ${imatest}")
 
-  }
+  run_command('export IMATEST=true', $targets)
+  $imatest2 = system::env('IMATEST')
+  out::message("the imatest after: ${imatest2}")
+
 
 #  run_command('export SOME_ENV_VAR=imatest', $targets)
 #  run_command('env', $targets)
