@@ -10,8 +10,7 @@ plan adhoc::env_test(
   out::message("the path: ${path}")
 
   get_targets($targets).each |$target| {
-    $_vars = vars($target)
-    out::message("the vars: ${_vars}")
+    out::message("the keys: ${target.keys}")
   }
 
 #  run_command('export SOME_ENV_VAR=imatest', $targets)
