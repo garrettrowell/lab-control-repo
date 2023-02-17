@@ -8,8 +8,8 @@ plan adhoc::env_test(
 
   $path = system::env('PATH')
   out::message("the path: ${path}")
-  $our_targets = get_targets($targets)
-  out::message("the targets: ${our_targets}")
+  $_vars = vars($targets)
+  out::message("the vars: ${_vars}")
 
 #  run_command('export SOME_ENV_VAR=imatest', $targets)
 #  run_command('env', $targets)
