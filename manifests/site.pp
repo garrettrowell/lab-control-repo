@@ -67,7 +67,7 @@ node default {
     echo { "role::${to_include}": }
   }
 
-  $dep_func = hiera('dep_func')
+  $dep_func = hiera('dep_func', undef)
 
   if $trusted['certname'] == 'garrett.rowell-pe-primary' {
     ini_setting { 'policy-based autosigning':
